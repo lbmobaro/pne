@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const multer = require("multer"); // For handling file uploads
-import fetch from 'node-fetch';
+const fetch = require('node-fetch');
 const app = express();
 
 app.use(bodyParser.json());
