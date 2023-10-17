@@ -16,6 +16,7 @@ app.post("/api/sendToMobaro", upload.single("attachment"), async (req, res) => {
         description: req.body.description,
         start: req.body.startDate,
         end: req.body.completionDate,
+        target: "locations/109477-A",
         attachments: req.file ? [req.file.buffer.toString("base64")] : [], // Convert file to base64 if available
     };
 
