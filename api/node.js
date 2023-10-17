@@ -11,10 +11,13 @@ const storage = multer.memoryStorage(); // Store file data in memory
 const upload = multer({ storage });
 
 app.post("/api/sendToMobaro", upload.single("attachment"), async (req, res) => {
-    const projectData = JSON.parse(req.body.projectData);
-
-    // Access uploaded file data from req.file
-    const attachmentData = req.file;
+    const projectData = {
+        name: req.body.name,
+        description: req.body.description,
+        start: req.body.startDate,
+        end: req.body.completionDate,
+        attachments: req.file ? [req.file.buffer.toString("base64")] : [], // Convert file to base64 if available
+    };
 
     // Prepare headers for the Mobaro API request
     const headers = {
@@ -22,25 +25,12 @@ app.post("/api/sendToMobaro", upload.single("attachment"), async (req, res) => {
         "Content-Type": "application/json",
     };
 
-    // Prepare the data to be sent to the Mobaro API
-    const mobaroData = {
-        name: projectData.name,
-        description: projectData.description,
-        assignees: [/* Include assignee data here if available */],
-        target: projectData.target,
-        priority: projectData.priority,
-        start: projectData.startDate,
-        end: projectData.completionDate,
-        categories: [/* Include categories data here if available */],
-        attachments: [/* Include file data here if available */],
-    };
-
     // Perform the POST request to the Mobaro API
     try {
         const response = await fetch("https://app.mobaro.com/api/customers/assignments", {
             method: "POST",
             headers: headers,
-            body: JSON.stringify(mobaroData),
+            body: JSON.stringify(projectData),
         });
 
         if (response.ok) {
@@ -62,4 +52,3 @@ const port = process.env.PORT || 3000; // Use the port defined in environment va
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
-
