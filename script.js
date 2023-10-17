@@ -1,21 +1,24 @@
 document.getElementById("projectForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
-    const formData = {
-        name: document.getElementById("name").value,
-        department: document.getElementById("department").value,
-        description: document.getElementById("description").value,
-        startDate: document.getElementById("startDate").value,
-        completionDate: document.getElementById("completionDate").value,
-        expenseAllocation: document.getElementById("expenseAllocation").value
-    };
+    const formData = new FormData();
+    formData.append("name", document.getElementById("name").value);
+    formData.append("department", document.getElementById("department").value);
+    formData.append("description", document.getElementById("description").value);
+    formData.append("startDate", document.getElementById("startDate").value);
+    formData.append("completionDate", document.getElementById("completionDate").value);
+    formData.append("expenseAllocation", document.getElementById("expenseAllocation").value);
+
+    // Append the file input to the FormData
+    const fileInput = document.getElementById("file");
+    formData.append("attachment", fileInput.files[0]);
 
     fetch("/api/sendToMobaro", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "x-api-key": process.env.MOBARO_API_KEY, // Use your API key stored in environment variables
         },
-        body: JSON.stringify(formData)
+        body: formData
     })
     .then(response => response.json())
     .then(data => {
@@ -27,3 +30,4 @@ document.getElementById("projectForm").addEventListener("submit", function(event
         console.error(error);
     });
 });
+
