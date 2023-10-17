@@ -12,8 +12,8 @@ body {
 }
 
 .container {
-    max-width: 600px; /* Set the maximum width for the form */
-    width: 100%; /* Ensure the form stays within the specified width */
+    max-width: 600px; /* Set the maximum width for the form container */
+    width: 100%;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
@@ -29,8 +29,13 @@ h1 {
 
 /* Form styles */
 form {
-    display: flex;
-    flex-direction: column;
+    max-width: 400px; /* Set the maximum width for the form */
+    width: 100%;
+    margin: 0 auto; /* Center the form horizontally */
+    padding: 20px; /* Add padding to the form for spacing */
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
 }
 
 label {
@@ -76,7 +81,7 @@ button[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-/* Add spacing between input fields and container's edges */
+/* Add spacing between input fields and form edges */
 input[type="text"],
 input[type="date"],
 textarea,
@@ -90,6 +95,9 @@ input[type="file"] {
     .container {
         max-width: 100%;
         padding: 10px;
+    }
+    form {
+        max-width: 100%; /* Make the form full width on smaller screens */
     }
     input[type="text"],
     input[type="date"],
