@@ -15,9 +15,6 @@ document.getElementById("projectForm").addEventListener("submit", function(event
 
     fetch("/api/sendToMobaro", {
         method: "POST",
-        headers: {
-            "x-api-key": process.env.MOBARO_API_KEY, // Use your API key stored in environment variables
-        },
         body: formData
     })
     .then(response => response.json())
@@ -30,4 +27,3 @@ document.getElementById("projectForm").addEventListener("submit", function(event
         console.error(error);
     });
 });
-
