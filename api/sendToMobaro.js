@@ -49,7 +49,7 @@ app.post("/api/sendToMobaro", upload.single("attachment"), async (req, res) => {
 
     const projectData = {
         name: req.body.description,
-        description: formattedDescription,
+        description: newDescription,
         assignee: "users/112899-C",
         start: req.body.startDate,
         end: req.body.completionDate,
