@@ -10,10 +10,46 @@ app.use(bodyParser.json());
 const storage = multer.memoryStorage(); // Store file data in memory
 const upload = multer({ storage });
 
+// Define the generateDescription function on the server-side
+function generateDescription(req) {
+    // Get values from req.body
+    const name = req.body.name;
+    const department = req.body.department;
+    const description = req.body.description;
+    const siteContact = req.body.siteContact;
+    const startDate = req.body.startDate;
+    const completionDate = req.body.completionDate;
+    const glCode = req.body.glCode;
+    const costCenterCode = req.body.costCenterCode;
+    const costUnitCode = req.body.costUnitCode;
+    const projectCode = req.body.projectCode;
+    const projectBudget = req.body.projectBudget;
+
+    // Create the description with bold titles and input values
+    const formattedDescription = `
+        Name: ${name}
+        Department: ${department}
+        Description: ${description}
+        Site Contact: ${siteContact}
+        Start Date: ${startDate}
+        End Date: ${completionDate}
+        GL Code: ${glCode}
+        Cost Center Code: ${costCenterCode}
+        Cost Unit Code: ${costUnitCode}
+        Project Code: ${projectCode}
+        Project Budget: ${projectBudget}
+    `;
+
+    return formattedDescription;
+}
+
 app.post("/api/sendToMobaro", upload.single("attachment"), async (req, res) => {
+    // Call generateDescription with the req object to get the formatted description
+    const description = generateDescription(req);
+
     const projectData = {
-        name: req.body.description,
-        description: generateDescription(),
+        name: description, // Use the formatted description as the "name"
+        description: req.body.description, // Use the user-entered description as the "description"
         assignee: "users/112899-C",
         start: req.body.startDate,
         end: req.body.completionDate,
