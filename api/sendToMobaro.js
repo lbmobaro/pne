@@ -12,8 +12,8 @@ const upload = multer({ storage });
 
 app.post("/api/sendToMobaro", upload.single("attachment"), async (req, res) => {
     const projectData = {
-        name: req.body.name,
-        description: req.body.description, // Use the user-entered description as is
+        name: req.body.description,
+        description: req.body.formattedDescriptio, // Use the user-entered description as is
         assignee: "users/112899-C",
         start: req.body.startDate,
         end: req.body.completionDate,
