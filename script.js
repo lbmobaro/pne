@@ -16,8 +16,9 @@ document.getElementById("projectForm").addEventListener("submit", function(event
     formData.append("projectBudget", document.getElementById("projectBudget").value);
 
     // Append the file input to the FormData
-    const fileInput = document.getElementById("file");
+    const fileInput = document.getElementById("attachments");
     formData.append("attachment", fileInput.files[0]);
+
 
     fetch("/api/sendToMobaro", {
         method: "POST",
