@@ -48,7 +48,7 @@ app.post("/api/sendToMobaro", upload.single("attachment"), async (req, res) => {
     const description = generateDescription(req);
 
     const projectData = {
-        name: req.body.description, // Use the formatted description as the "name"
+        name: description, // Use the formatted description as the "name"
         description: description, // Use the user-entered description as the "description"
         assignee: "users/112899-C",
         start: req.body.startDate,
