@@ -7,8 +7,6 @@ app.use(bodyParser.json());
 
 app.post("/api/sendToMobaro", async (req, res) => {
     try {
-        console.log("Received request data:", req.body); // Debug statement
-
         const projectData = {
             name: req.body.description,
             description: req.body.formattedDescription, // Use the user-entered description as is
@@ -19,9 +17,6 @@ app.post("/api/sendToMobaro", async (req, res) => {
             // You can handle file uploads separately if needed
             // attachments: req.file ? [req.file.buffer.toString("base64")] : [],
         };
-
-        // Debug statement
-        console.log("Sending project data:", projectData);
 
         // Prepare headers for the Mobaro API request
         const headers = {
@@ -36,13 +31,18 @@ app.post("/api/sendToMobaro", async (req, res) => {
             body: JSON.stringify(projectData),
         });
 
+        const responseBody = await response.text(); // Read the response as text
+
         if (response.ok) {
             // Success response from Mobaro API
             res.json({ message: "Project data sent to Mobaro successfully!" });
         } else {
             // Error response from Mobaro API
-            const errorMessage = await response.text();
-            res.status(response.status).json({ error: errorMessage });
+            console.error(`Error response from Mobaro API: ${response.status} ${response.statusText}`);
+            console.error(`Response Body: ${responseBody}`);
+
+            // Send an error response to the client
+            res.status(response.status).json({ error: "Error sending project data to Mobaro." });
         }
     } catch (error) {
         // Handle any network or request errors
