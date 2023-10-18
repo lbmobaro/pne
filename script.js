@@ -28,7 +28,7 @@ document.getElementById("projectForm").addEventListener("submit", function(event
         method: "POST",
         body: formData,
         headers: {
-            "Content-Type": "multipart/form-data", // Set the content type for FormData
+            "Content-Type": "application/json", // Set the content type for FormData
         },
     })
     .then(response => response.json())
