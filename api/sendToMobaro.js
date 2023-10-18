@@ -12,6 +12,7 @@ const upload = multer({ storage });
 
 app.post("/api/sendToMobaro", upload.single("attachment"), async (req, res) => {
     const projectData = {
+        name: req.body.name,
         description: req.body.description,
         start: req.body.startDate,
         end: req.body.completionDate,
