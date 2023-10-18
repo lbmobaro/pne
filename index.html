@@ -8,30 +8,45 @@
 </head>
 <body>
     <form id="projectForm">
-        <label for="name">Name:</label>
-        <input type="text" id="name" required><br>
-
-        <label for="department">Department:</label>
-        <input type="text" id="department" required><br>
-
-        <label for="description">Description:</label>
-        <textarea id="description" rows="4" required></textarea><br>
-
-        <label for="startDate">Start Date:</label>
-        <input type="date" id="startDate" required><br>
-
-        <label for="completionDate">Completion Date:</label>
-        <input type="date" id="completionDate" required><br>
-
-        <label for="expenseAllocation">Expense Allocation (Macola coding):</label>
-        <input type="text" id="expenseAllocation" required><br>
-
-        <label for="file">Upload File:</label>
-        <input type="file" id="file" accept=".pdf, .doc, .docx"> <!-- Accept only specific file types if needed -->
-        <br>
-
+        <label for="name">Name *</label>
+        <input type="text" id="name" name="name" required>
+    
+        <label for="department">Department *</label>
+        <input type="text" id="department" name="department" required>
+    
+        <label for="description">Description of work required *</label>
+        <textarea id="description" name="description" required></textarea>
+    
+        <label for="attachments">Attachments (map/photos)</label>
+        <input type="file" id="attachments" name="attachments">
+    
+        <label for="siteContact">Site Contact *</label>
+        <input type="text" id="siteContact" name="siteContact" required>
+    
+        <label for="startDate">Earliest Start Date *</label>
+        <input type="date" id="startDate" name="startDate" required>
+    
+        <label for="completionDate">Completion Date *</label>
+        <input type="date" id="completionDate" name="completionDate" required>
+    
+        <label for="glCode">GL Code *</label>
+        <input type="text" id="glCode" name="glCode" required>
+    
+        <label for="costCenterCode">Cost Center Code</label>
+        <input type="text" id="costCenterCode" name="costCenterCode">
+    
+        <label for="costUnitCode">Cost Unit Code</label>
+        <input type="text" id="costUnitCode" name="costUnitCode">
+    
+        <label for="projectCode">Project Code *</label>
+        <input type="text" id="projectCode" name="projectCode" required>
+    
+        <label for="projectBudget">Project Budget *</label>
+        <input type="text" id="projectBudget" name="projectBudget" required>
+    
         <button type="submit">Submit</button>
     </form>
+
 
     <script src="script.js"></script> <!-- You can create a JavaScript file for client-side logic -->
 </body>
