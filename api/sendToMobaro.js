@@ -1,33 +1,35 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const multer = require("multer"); // For handling file uploads
-const fetch = require('node-fetch');
+const fetch = require("node-fetch");
 const app = express();
 
 app.use(bodyParser.json());
 
-// Configure multer for handling file uploads
-const storage = multer.memoryStorage(); // Store file data in memory
-const upload = multer({ storage });
-
 app.post("/api/sendToMobaro", async (req, res) => {
-    const projectData = {
-        name: req.body.description,
-        description: req.body.formattedDescription, // Use the user-entered description as is
-        assignee: "users/112899-C",
-        start: req.body.startDate,
-        end: req.body.completionDate,
-        target: "locations/109477-A",
-    };
-
-    // Prepare headers for the Mobaro API request
-    const headers = {
-        "x-api-key": process.env.MOBARO_API_KEY, // Use your API key stored in environment variables
-        "Content-Type": "application/json",
-    };
-
-    // Perform the POST request to the Mobaro API
     try {
+        console.log("Received request data:", req.body); // Debug statement
+
+        const projectData = {
+            name: req.body.description,
+            description: req.body.formattedDescription, // Use the user-entered description as is
+            assignee: "users/112899-C",
+            start: req.body.startDate,
+            end: req.body.completionDate,
+            target: "locations/109477-A",
+            // You can handle file uploads separately if needed
+            // attachments: req.file ? [req.file.buffer.toString("base64")] : [],
+        };
+
+        // Debug statement
+        console.log("Sending project data:", projectData);
+
+        // Prepare headers for the Mobaro API request
+        const headers = {
+            "x-api-key": process.env.MOBARO_API_KEY, // Use your API key stored in environment variables
+            "Content-Type": "application/json",
+        };
+
+        // Perform the POST request to the Mobaro API
         const response = await fetch("https://app.mobaro.com/api/customers/assignments", {
             method: "POST",
             headers: headers,
@@ -36,7 +38,7 @@ app.post("/api/sendToMobaro", async (req, res) => {
 
         if (response.ok) {
             // Success response from Mobaro API
-            res.json({ message: "Project data and file sent to Mobaro successfully!" });
+            res.json({ message: "Project data sent to Mobaro successfully!" });
         } else {
             // Error response from Mobaro API
             const errorMessage = await response.text();
