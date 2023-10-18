@@ -45,11 +45,11 @@ function generateDescription(req) {
 
 app.post("/api/sendToMobaro", upload.single("attachment"), async (req, res) => {
     // Call generateDescription with the req object to get the formatted description
-    const description = generateDescription(req);
+    const newDescription = generateDescription(req);
 
     const projectData = {
-        name: description, // Use the formatted description as the "name"
-        description: description, // Use the user-entered description as the "description"
+        name: req.body.description,
+        description: formattedDescription,
         assignee: "users/112899-C",
         start: req.body.startDate,
         end: req.body.completionDate,
