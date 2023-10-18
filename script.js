@@ -1,8 +1,8 @@
 document.getElementById("projectForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
-    // Generate the description based on form input values
-    const description = generateDescription();
+    // Generate the formatted description based on form input values
+    const formattedDescription = generateFormattedDescription();
 
     const formData = new FormData();
     formData.append("name", document.getElementById("name").value);
@@ -17,17 +17,19 @@ document.getElementById("projectForm").addEventListener("submit", function(event
     formData.append("projectCode", document.getElementById("projectCode").value);
     formData.append("projectBudget", document.getElementById("projectBudget").value);
 
-    // Append the generated description to the FormData
-    formData.append("description", description);
-    
+    // Append the generated formatted description to the FormData
+    formData.append("formattedDescription", formattedDescription);
+
     // Append the file input to the FormData
     const fileInput = document.getElementById("attachments");
     formData.append("attachment", fileInput.files[0]);
 
-
     fetch("/api/sendToMobaro", {
         method: "POST",
-        body: formData
+        body: formData,
+        headers: {
+            "Content-Type": "multipart/form-data", // Set the content type for FormData
+        },
     })
     .then(response => response.json())
     .then(data => {
@@ -40,11 +42,11 @@ document.getElementById("projectForm").addEventListener("submit", function(event
     });
 });
 
-function generateDescription() {
+function generateFormattedDescription() {
     // Get values from form fields
     const name = document.getElementById("name").value;
     const department = document.getElementById("department").value;
-    const description = document.getElementById("description").value;
+    const userDescription = document.getElementById("description").value; // User-entered description
     const siteContact = document.getElementById("siteContact").value;
     const startDate = document.getElementById("startDate").value;
     const completionDate = document.getElementById("completionDate").value;
@@ -54,11 +56,11 @@ function generateDescription() {
     const projectCode = document.getElementById("projectCode").value;
     const projectBudget = document.getElementById("projectBudget").value;
 
-    // Create the description with bold titles and input values
+    // Create the formatted description with bold titles and input values
     const formattedDescription = `
         Name: ${name}
         Department: ${department}
-        Description: ${description}
+        User Description: ${userDescription}
         Site Contact: ${siteContact}
         Start Date: ${startDate}
         End Date: ${completionDate}
