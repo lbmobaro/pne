@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 const storage = multer.memoryStorage(); // Store file data in memory
 const upload = multer({ storage });
 
-app.post("/api/sendToMobaro", upload.single("attachment"), async (req, res) => {
+app.post("/api/sendToMobaro", async (req, res) => {
     const projectData = {
         name: req.body.description,
         description: req.body.formattedDescription, // Use the user-entered description as is
