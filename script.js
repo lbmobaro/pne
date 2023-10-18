@@ -5,9 +5,15 @@ document.getElementById("projectForm").addEventListener("submit", function(event
     formData.append("name", document.getElementById("name").value);
     formData.append("department", document.getElementById("department").value);
     formData.append("description", document.getElementById("description").value);
+    formData.append("attachments", document.getElementById("attachments").files[0]);
+    formData.append("siteContact", document.getElementById("siteContact").value);
     formData.append("startDate", document.getElementById("startDate").value);
     formData.append("completionDate", document.getElementById("completionDate").value);
-    formData.append("expenseAllocation", document.getElementById("expenseAllocation").value);
+    formData.append("glCode", document.getElementById("glCode").value);
+    formData.append("costCenterCode", document.getElementById("costCenterCode").value);
+    formData.append("costUnitCode", document.getElementById("costUnitCode").value);
+    formData.append("projectCode", document.getElementById("projectCode").value);
+    formData.append("projectBudget", document.getElementById("projectBudget").value);
 
     // Append the file input to the FormData
     const fileInput = document.getElementById("file");
