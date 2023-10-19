@@ -129,9 +129,14 @@ button[type="submit"]:hover {
     }
 }
 
-"""
+# Modifying the CSS to add a gradient background and solid lines for input fields
 
-# Calculate the number of lines in the reworked CSS
-num_lines_reworked = len(reworked_css_code.splitlines())
+modified_css_code = reworked_css_code.replace(
+    "background-color: var(--bg-color);",
+    "background: linear-gradient(45deg, #f3ec78, #af4261);"
+).replace(
+    "box-shadow: 0 2px 5px var(--input-shadow) inset;",
+    "border: 2px solid var(--input-border-color);"
+)
 
-reworked_css_code, num_lines_reworked
+
