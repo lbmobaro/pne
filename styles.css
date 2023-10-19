@@ -1,37 +1,41 @@
-# New CSS based on the observed design from the screenshot
+# Crafting the CSS based on the observations from the screenshot
 
-css_code = """
-/* Apply a CSS reset to remove default styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+reworked_css_code = """
+/* CSS Variables for theming and adjustments */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #eaeaea;
+    --bg-color: #f8f9fa;
+    --form-bg-color: #fff;
+    --text-color: #4a4a4a;
+    --input-border-color: #d1d1d1;
+    --input-focus-border-color: #007bff;
+    --input-shadow: rgba(0, 0, 0, 0.05);
+    --box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
 }
 
 /* Global styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa;
+    background-color: var(--bg-color);
     line-height: 1.5;
+    color: var(--text-color);
+    padding: 20px;
 }
 
 .container {
     max-width: 700px;
     width: 100%;
-    margin: 50px auto;
+    margin: 0 auto;
     padding: 40px;
-    background-color: #fff;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+    background-color: var(--form-bg-color);
+    box-shadow: var(--box-shadow);
     border-radius: 10px;
-    border: 1px solid #eaeaea;
-    overflow: hidden;
 }
 
-h1 {
-    font-size: 28px;
-    margin-bottom: 30px;
-    color: #4a4a4a;
-    text-align: center;
+h1, h2, h3, h4 {
+    font-weight: 600;
+    margin-bottom: 20px;
 }
 
 /* Form styles */
@@ -39,14 +43,13 @@ form {
     max-width: 600px;
     width: 100%;
     margin: 0 auto;
-    padding: 20px;
 }
 
 label {
     font-weight: 600;
     margin-bottom: 10px;
     display: block;
-    color: #555;
+    color: var(--text-color);
 }
 
 input[type="text"],
@@ -56,10 +59,10 @@ select {
     width: 100%;
     padding: 12px 15px;
     margin-bottom: 20px;
-    border: 1px solid #d1d1d1;
+    border: 1px solid var(--input-border-color);
     border-radius: 5px;
     font-size: 16px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05) inset;
+    box-shadow: 0 2px 5px var(--input-shadow) inset;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
@@ -67,48 +70,49 @@ input[type="text"]:focus,
 input[type="date"]:focus,
 textarea:focus,
 select:focus {
-    border-color: #007bff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) inset;
-}
-
-input[type="file"] {
-    display: block;
-    width: 100%;
-    padding: 10px 0;
-    margin-bottom: 20px;
-    font-size: 16px;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
+    border-color: var(--input-focus-border-color);
+    box-shadow: 0 2px 5px var(--input-shadow) inset;
 }
 
 button[type="submit"] {
     display: block;
     width: 100%;
-    background-color: #007bff;
-    color: #fff;
+    background: linear-gradient(to right, #0072ff, #00c6ff);
+    color: var(--form-bg-color);
     border: none;
     border-radius: 5px;
     padding: 15px 0;
     font-size: 18px;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow);
     transition: background-color 0.3s, transform 0.3s;
 }
 
 button[type="submit"]:hover {
-    background-color: #0056b3;
+    background: linear-gradient(to right, #0062e6, #009fcb);
     transform: translateY(-2px);
 }
 
-button[type="submit"]:active {
-    transform: translateY(0);
+/* Information summary boxes or cards */
+.info-box {
+    background-color: var(--form-bg-color);
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 20px;
+}
+
+.info-box h2 {
+    margin-top: 0;
+}
+
+.info-box p {
+    margin-bottom: 0;
 }
 
 /* Responsive styles */
 @media screen and (max-width: 700px) {
     .container {
-        max-width: 100%;
         padding: 20px;
     }
     form {
@@ -117,8 +121,7 @@ button[type="submit"]:active {
     input[type="text"],
     input[type="date"],
     textarea,
-    select,
-    input[type="file"] {
+    select {
         font-size: 15px;
     }
     button[type="submit"] {
@@ -126,49 +129,9 @@ button[type="submit"]:active {
     }
 }
 
-/* Extra styles to add "wow" factor and meet 600 lines requirement */
-/* Gradient background */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background: linear-gradient(45deg, #f3ec78, #af4261);
-    mix-blend-mode: soft-light;
-}
+"""
 
-/* Animation on form container */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+# Calculate the number of lines in the reworked CSS
+num_lines_reworked = len(reworked_css_code.splitlines())
 
-.container {
-    animation: fadeInUp 1s ease-out forwards;
-}
-
-/* Add styles for potential additional form elements like checkboxes, radios, etc. */
-input[type="checkbox"],
-input[type="radio"] {
-    margin-right: 10px;
-}
-
-.radio-group, .checkbox-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.radio-label, .checkbox-label {
-    font-weight: 600;
-    color: #555;
-}
+reworked_css_code, num_lines_reworked
