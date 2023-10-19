@@ -1,33 +1,35 @@
-/* CSS Variables for theming and adjustments */
+# Crafting a modern-looking responsive form CSS
+
+modern_form_css = """
+/* CSS Variables for easy theming and adjustments */
 :root {
-    --primary-color: #007bff;
-    --secondary-color: #eaeaea;
-    --bg-color: #f8f9fa;
-    --form-bg-color: #fff;
-    --text-color: #4a4a4a;
-    --input-border-color: #d1d1d1;
-    --input-focus-border-color: #007bff;
+    --primary-color: #3498db;
+    --bg-color: #f7f8fc;
+    --form-bg-color: #ffffff;
+    --text-color: #333;
+    --input-border-color: #e0e0e0;
+    --input-focus-border-color: #3498db;
     --input-shadow: rgba(0, 0, 0, 0.05);
-    --box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+    --transition-speed: 0.3s;
 }
 
 /* Global styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(45deg, #f3ec78, #af4261);
-    line-height: 1.5;
+    background-color: var(--bg-color);
+    line-height: 1.6;
     color: var(--text-color);
-    padding: 20px;
+    padding: 40px 0;
 }
 
 .container {
-    max-width: 700px;
-    width: 100%;
+    max-width: 600px;
+    width: 90%;
     margin: 0 auto;
-    padding: 40px;
+    padding: 30px;
     background-color: var(--form-bg-color);
-    box-shadow: var(--box-shadow);
-    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 h1, h2, h3, h4 {
@@ -37,84 +39,65 @@ h1, h2, h3, h4 {
 
 /* Form styles */
 form {
-    max-width: 600px;
     width: 100%;
-    margin: 0 auto;
 }
 
 label {
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 10px;
     display: block;
-    color: var(--text-color);
 }
 
 input[type="text"],
+input[type="email"],
+input[type="password"],
 input[type="date"],
 textarea,
 select {
     width: 100%;
     padding: 12px 15px;
     margin-bottom: 20px;
-    border: 2px solid var(--input-border-color);
-    border-radius: 5px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 4px;
     font-size: 16px;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    transition: border-color var(--transition-speed);
 }
 
 input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
 input[type="date"]:focus,
 textarea:focus,
 select:focus {
     border-color: var(--input-focus-border-color);
-    box-shadow: 0 2px 5px var(--input-shadow) inset;
+    outline: none;
 }
 
 button[type="submit"] {
     display: block;
     width: 100%;
-    background: linear-gradient(to right, #0072ff, #00c6ff);
+    background-color: var(--primary-color);
     color: var(--form-bg-color);
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     padding: 15px 0;
     font-size: 18px;
     cursor: pointer;
-    box-shadow: var(--box-shadow);
-    transition: background-color 0.3s, transform 0.3s;
+    transition: background-color var(--transition-speed);
 }
 
 button[type="submit"]:hover {
-    background: linear-gradient(to right, #0062e6, #009fcb);
-    transform: translateY(-2px);
-}
-
-/* Information summary boxes or cards */
-.info-box {
-    background-color: var(--form-bg-color);
-    border-radius: 5px;
-    padding: 20px;
-    box-shadow: var(--box-shadow);
-    margin-bottom: 20px;
-}
-
-.info-box h2 {
-    margin-top: 0;
-}
-
-.info-box p {
-    margin-bottom: 0;
+    background-color: #2980b9;
 }
 
 /* Responsive styles */
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 600px) {
     .container {
         padding: 20px;
     }
-    form {
-        max-width: 100%;
-    }
     input[type="text"],
+    input[type="email"],
+    input[type="password"],
     input[type="date"],
     textarea,
     select {
