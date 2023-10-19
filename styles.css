@@ -172,10 +172,3 @@ input[type="radio"] {
     font-weight: 600;
     color: #555;
 }
-
-"""
-
-# Calculate number of lines in the CSS
-num_lines = len(css_code.splitlines())
-
-css_code, num_lines
