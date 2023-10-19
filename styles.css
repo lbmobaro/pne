@@ -1,21 +1,4 @@
-# Enhancing the provided CSS to make it more modern and appealing
-
-enhanced_css = """
-/* CSS Variables for easy theming and adjustments */
-:root {
-    --primary-color: #3498db;
-    --bg-color: #f7f8fc;
-    --form-bg-color: #ffffff;
-    --text-color: #2c3e50;
-    --input-border-color: #e0e0e0;
-    --input-focus-border-color: #3498db;
-    --input-hover-border-color: #95a5a6;
-    --input-shadow: rgba(0, 0, 0, 0.02);
-    --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    --transition-speed: 0.3s;
-}
-
-/* Apply a CSS reset to remove default styles */
+/* Reset default styles */
 * {
     margin: 0;
     padding: 0;
@@ -24,98 +7,95 @@ enhanced_css = """
 
 /* Global styles */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-color);
-    line-height: 1.6;
-    color: var(--text-color);
-    padding: 50px 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
 }
 
+/* Container styles */
 .container {
     max-width: 600px;
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
-    padding: 30px;
-    background-color: var(--form-bg-color);
-    box-shadow: var(--box-shadow);
-    border-radius: 8px;
-    overflow: hidden;  /* To ensure the header color stretches */
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
 }
 
-header {
-    background-color: var(--primary-color);
-    color: white;
-    text-align: center;
-    padding: 20px 0;
-    font-size: 26px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+/* Header styles */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
 }
 
 /* Form styles */
 form {
-    max-width: 500px;
+    max-width: 400px;
     width: 100%;
-    margin: 20px auto 0;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
 }
 
+/* Form label styles */
 label {
-    font-weight: 500;
-    margin-bottom: 10px;
-    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
+/* Form input and select styles */
 input[type="text"],
 input[type="date"],
 textarea,
-select {
+select,
+input[type="file"] {
     width: 100%;
-    padding: 12px 15px;
-    margin-bottom: 20px;
-    border: 1px solid var(--input-border-color);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
-    transition: border-color var(--transition-speed);
 }
 
-input[type="text"]:hover,
-input[type="date"]:hover,
-textarea:hover,
-select:hover {
-    border-color: var(--input-hover-border-color);
+/* Form file input style */
+input[type="file"] {
+    background-color: #f9f9f9;
+    cursor: pointer;
 }
 
-input[type="text"]:focus,
-input[type="date"]:focus,
-textarea:focus,
-select:focus {
-    border-color: var(--input-focus-border-color);
-    outline: none;
-    box-shadow: 0 0 5px var(--input-focus-border-color);
-}
-
+/* Form submit button styles */
 button[type="submit"] {
-    display: block;
-    width: 100%;
-    background-color: var(--primary-color);
-    color: var(--form-bg-color);
+    background-color: #007bff;
+    color: #fff;
     border: none;
     border-radius: 4px;
-    padding: 15px 0;
+    padding: 10px 20px;
     font-size: 18px;
     cursor: pointer;
-    transition: background-color var(--transition-speed), transform var(--transition-speed);
+    transition: background-color 0.3s;
 }
 
 button[type="submit"]:hover {
-    background-color: #2980b9;
-    transform: translateY(-2px);
+    background-color: #0056b3;
+}
+
+/* Adjust margin-bottom for input fields */
+input[type="text"],
+input[type="date"],
+textarea,
+select,
+input[type="file"] {
+    margin-bottom: 10px;
 }
 
 /* Responsive styles */
 @media screen and (max-width: 600px) {
     .container {
-        padding: 20px;
+        max-width: 100%;
+        padding: 10px;
     }
     form {
         max-width: 100%;
@@ -123,10 +103,17 @@ button[type="submit"]:hover {
     input[type="text"],
     input[type="date"],
     textarea,
-    select {
-        font-size: 15px;
+    select,
+    input[type="file"] {
+        font-size: 14px;
     }
     button[type="submit"] {
         font-size: 16px;
     }
 }
+
+/* Additional styling for specific form elements (customize as needed) */
+/* Example: */
+/* label[for="name"] {
+    color: #ff5733;
+} */
