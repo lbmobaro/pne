@@ -10,7 +10,7 @@ app.post("/api/sendToMobaro", async (req, res) => {
         const projectData = {
             name: req.body.description,
             description: req.body.formattedDescription, // Use the user-entered description as is
-            assignee: "users/112899-C",
+            assignees: "users/112899-C",
             start: startDate.toISOString(),
             end: completionDate.toISOString(),
             target: "locations/109477-A",
