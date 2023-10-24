@@ -8,8 +8,6 @@
 /* Global styles */
 body {
     font-family: Montserrat, sans-serif;
-    background-image: linear-gradient(to right top, #104f57, #075c61, #026a6a, #057871, #158676, #2a957a, #40a47b, #58b37b, #7bc679, #a1d875, #cbe972, #f9f871);
-    background-attachment: fixed; /* Ensures the background remains fixed while scrolling */
     color: #333;
 }
 
