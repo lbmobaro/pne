@@ -9,7 +9,7 @@ app.post("/api/sendToMobaro", async (req, res) => {
     try {
         const projectData = {
             name: req.body.description,
-            description: req.body.description, // Use the user-entered description as is
+            description: req.body.formattedDescription, // Use the user-entered description as is
             assignees: "users/112899-C",
             start: startDate.toISOString(),
             end: completionDate.toISOString(),
@@ -17,6 +17,8 @@ app.post("/api/sendToMobaro", async (req, res) => {
             // You can handle file uploads separately if needed
             // attachments: req.file ? [req.file.buffer.toString("base64")] : [],
         };
+
+        console.log("Sending projectData to Mobaro API:", projectData);
 
         // Prepare headers for the Mobaro API request
         const headers = {
