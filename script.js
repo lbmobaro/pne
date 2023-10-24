@@ -26,10 +26,7 @@ document.getElementById("projectForm").addEventListener("submit", function(event
 
     fetch("/api/sendToMobaro", {
         method: "POST",
-        body: formData,
-        headers: {
-            "Content-Type": "application/json", // Set the content type for FormData
-        },
+        body: formData
     })
     .then(response => response.json())
     .then(data => {
