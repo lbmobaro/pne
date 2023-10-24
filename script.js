@@ -57,8 +57,8 @@ function generateFormattedDescription() {
     const projectBudget = document.getElementById("projectBudget").value;
 
     // Create the formatted description with bold titles and input values
-    const formattedDescription = `
-        Name: ${name}
+    const formattedDescription = 
+        `Name: ${name}
         Department: ${department}
         User Description: ${userDescription}
         Site Contact: ${siteContact}
@@ -68,8 +68,7 @@ function generateFormattedDescription() {
         Cost Center Code: ${costCenterCode}
         Cost Unit Code: ${costUnitCode}
         Project Code: ${projectCode}
-        Project Budget: ${projectBudget}
-    `;
+        Project Budget: ${projectBudget}`;
 
     return formattedDescription;
 }
