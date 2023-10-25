@@ -6,10 +6,7 @@ module.exports = async (event, context) => {
       "x-api-key": process.env.MOBARO_API_KEY,
     };
 
-    const offset = event.queryStringParameters.offset || 0; // Get offset from query parameters (default to 0)
-    const limit = event.queryStringParameters.limit || 128; // Get limit from query parameters (default to 128)
-
-    const response = await fetch(`https://app.mobaro.com/api/customers/locations?offset=${offset}&limit=${limit}`, {
+    const response = await fetch("https://app.mobaro.com/api/customers/locations", {
       method: "GET",
       headers: headers,
     });
@@ -20,15 +17,21 @@ module.exports = async (event, context) => {
 
     const locationsData = await response.json();
 
-    // Create an array to hold location objects with name and id
-    const locationList = locationsData.items.map((location) => ({
-      name: location.name,
-      id: location.id,
-    }));
+    // Create a mapping between name and ID
+    const nameToIdMap = {};
+    locationsData.items.forEach((location) => {
+      nameToIdMap[location.name] = location.id;
+    });
+
+    // Retrieve the selected location name from the request (modify as needed)
+    const selectedLocationName = event.queryStringParameters.target;
+
+    // Use the name-to-ID mapping to get the corresponding ID
+    const selectedLocationId = nameToIdMap[selectedLocationName];
 
     return {
       statusCode: 200,
-      body: JSON.stringify(locationList), // Return an array of location objects
+      body: JSON.stringify({ target: selectedLocationId }), // Return the ID as the target
     };
   } catch (error) {
     return {
