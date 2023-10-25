@@ -6,37 +6,23 @@ module.exports = async (event, context) => {
       "x-api-key": process.env.MOBARO_API_KEY,
     };
 
-    // Array to hold the promises for fetching location data
-    const locationPromises = [];
+    const offset = event.queryStringParameters.offset || 0; // Get offset from query parameters (default to 0)
+    const limit = event.queryStringParameters.limit || 128; // Get limit from query parameters (default to 128)
 
-    // Define the offsets and the number of requests you want to make in parallel
-    const numRequests = 5; // You can adjust this number as needed
-    for (let offset = 0; offset < numRequests * 128; offset += 128) {
-      // Push each promise into the array
-      locationPromises.push(
-        fetch(`https://app.mobaro.com/api/customers/locations?offset=${offset}`, {
-          method: "GET",
-          headers: headers,
-        })
-      );
+    const response = await fetch(`https://app.mobaro.com/api/customers/locations?offset=${offset}&limit=${limit}`, {
+      method: "GET",
+      headers: headers,
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error fetching location data: ${response.statusText}`);
     }
 
-    // Use Promise.all to wait for all requests to complete
-    const responses = await Promise.all(locationPromises);
-
-    // Process the responses and aggregate the data
-    const locationsData = [];
-    for (const response of responses) {
-      if (!response.ok) {
-        throw new Error(`Error fetching location data: ${response.statusText}`);
-      }
-      const locationData = await response.json();
-      locationsData.push(...locationData.items);
-    }
+    const locationsData = await response.json();
 
     // Create a mapping between name and ID
     const nameToIdMap = {};
-    locationsData.forEach((location) => {
+    locationsData.items.forEach((location) => {
       nameToIdMap[location.name] = location.id;
     });
 
