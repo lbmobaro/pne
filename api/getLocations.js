@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-exports.handler = async (event, context) => {
+module.exports = async (req, res) => {
     try {
         const headers = {
             "x-api-key": process.env.MOBARO_API_KEY
@@ -41,14 +41,8 @@ exports.handler = async (event, context) => {
             offset += amount;
         } while (offset < total);
 
-        return {
-            statusCode: 200,
-            body: JSON.stringify(allLocations),
-        };
+        res.status(200).json(allLocations);
     } catch (error) {
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: error.message }),
-        };
+        res.status(500).json({ error: error.message });
     }
 };
