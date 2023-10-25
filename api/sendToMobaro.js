@@ -11,7 +11,7 @@ app.post("/api/sendToMobaro", async (req, res) => {
             name: req.body.userDescription,
             description: req.body.formattedDescription,
             assignees: ["users/112899-C"],
-            target: req.body.location,
+            target: req.body.location.id,
             priority: req.body.highPriority,
             start: new Date(req.body.startDate).toISOString(),
             end: new Date(req.body.completionDate).toISOString(),
