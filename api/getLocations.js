@@ -12,7 +12,12 @@ module.exports = async (event, context) => {
     });
 
     if (!response.ok) {
-      throw new Error(`Error fetching location data: ${response.statusText}`);
+      // Handle the error response (e.g., log or return an error message)
+      console.error(`Error fetching location data: ${response.status} ${response.statusText}`);
+      return {
+        statusCode: response.status,
+        body: JSON.stringify({ error: 'Error fetching location data' }),
+      };
     }
 
     const locationsData = await response.json();
