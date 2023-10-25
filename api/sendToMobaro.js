@@ -13,7 +13,7 @@ app.post("/api/sendToMobaro", async (req, res) => {
             assignees: "users/112899-C",
             start: req.body.startDate,
             end: req.body.completionDate,
-            target: "locations/109477-A",
+            target: "locations/109477-A"
             // You can handle file uploads separately if needed
             // attachments: req.file ? [req.file.buffer.toString("base64")] : [],
         };
