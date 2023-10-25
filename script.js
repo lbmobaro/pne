@@ -83,6 +83,24 @@ async function populateLocationsDropdown() {
 // Call the function to populate the Locations dropdown
 populateLocationsDropdown();
 
+// Add an event listener to the location dropdown
+const locationDropdown = document.getElementById("location");
+
+locationDropdown.addEventListener("change", (event) => {
+  const selectedLocationName = event.target.value;
+
+  // Make a request to your serverless function
+  fetch(`/api/getLocations?target=${selectedLocationName}`)
+    .then((response) => response.json())
+    .then((data) => {
+      const selectedLocationId = data.target;
+
+      // Now, you can use selectedLocationId when sending your form data to the Mobaro API
+    })
+    .catch((error) => {
+      console.error("Error fetching location ID:", error);
+    });
+});
 
 function generateFormattedDescription() {
   // Get values from form fields
