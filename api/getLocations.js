@@ -2,10 +2,7 @@ const express = require("express");
 const fetch = require("node-fetch"); // Import the 'node-fetch' library
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-
-// Define your Mobaro API key (replace with your actual API key)
-const MOBARO_API_KEY = "your_api_key_here";
+const PORT = process.env.PORT || 3000
 
 app.use(express.json());
 
@@ -14,9 +11,8 @@ app.get("/api/getLocations", async (req, res) => {
   try {
     // Prepare headers for the Mobaro API request, including the 'x-api-key'
     const headers = {
-      "x-api-key": MOBARO_API_KEY,
+      "x-api-key": process.env.MOBARO_API_KEY, // Use your API key stored in environment variables
       "Content-Type": "application/json",
-    };
 
     // Fetch Locations data from Mobaro API
     const response = await fetch("https://app.mobaro.com/api/customers/locations", {
