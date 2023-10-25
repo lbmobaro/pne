@@ -1,43 +1,33 @@
-const express = require("express");
-const fetch = require("node-fetch"); // Import the 'node-fetch' library
+const fetch = require("node-fetch");
 
-const app = express();
-const PORT = process.env.PORT || 3000
-
-app.use(express.json());
-
-// Create an endpoint to fetch locations data
-app.get("/api/getLocations", async (req, res) => {
+exports.handler = async (event, context) => {
   try {
-    // Prepare headers for the Mobaro API request, including the 'x-api-key'
-    const headers = {
-      "x-api-key": process.env.MOBARO_API_KEY, // Use your API key stored in environment variables
-      "Content-Type": "application/json",
+    let offset = 0;
+    let allLocations = [];
 
-    // Fetch Locations data from Mobaro API
-    const response = await fetch("https://app.mobaro.com/api/customers/locations", {
-      method: "GET",
-      headers: headers,
-    });
-
-    if (response.ok) {
+    while (true) {
+      // Fetch Locations data from Mobaro API with the current offset
+      const response = await fetch(`https://app.mobaro.com/api/customers/locations?offset=${offset}`);
       const locationsData = await response.json();
-      res.json(locationsData); // Send the location data to the client
-    } else {
-      // Handle error responses from Mobaro API
-      const responseBody = await response.text();
-      console.error(`Error response from Mobaro API: ${response.status} ${response.statusText}`);
-      console.error(`Response Body: ${responseBody}`);
-      res.status(response.status).json({ error: "Error fetching location data from Mobaro." });
-    }
-  } catch (error) {
-    // Handle any network or request errors
-    console.error("Error fetching location data:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+      if (locationsData.length === 0) {
+        // No more data, break the loop
+        break;
+      }
+
+      allLocations = allLocations.concat(locationsData);
+      offset += 128; // Increase offset for the next request
+    }
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify(allLocations),
+    };
+  } catch (error) {
+    console.error("Error fetching Locations data:", error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "Internal Server Error" }),
+    };
+  }
+};
