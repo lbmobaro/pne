@@ -33,11 +33,6 @@ app.post("/api/sendToMobaro", async (req, res) => {
             body: JSON.stringify(projectData),
         });
 
-        const locationResponse = await fetch("https://app.mobaro.com/api/customers/locations", {
-            method: "GET",
-            headers: headers,
-        });
-
         const responseBody = await response.text(); // Read the response as text
 
         if (response.ok) {
