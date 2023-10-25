@@ -41,6 +41,9 @@ module.exports = async (req, res) => {
             offset += amount;
         } while (offset < total);
 
+        // Sort the locations alphabetically by the `name` property
+        allLocations.sort((a, b) => a.name.localeCompare(b.name));
+
         res.status(200).json(allLocations);
     } catch (error) {
         res.status(500).json({ error: error.message });
