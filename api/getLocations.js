@@ -1,33 +1,31 @@
 const fetch = require("node-fetch");
 
 exports.handler = async (event, context) => {
-  try {
-    let offset = 0;
-    let allLocations = [];
+    try {
+        const headers = {
+            "x-api-key": process.env.MOBARO_API_KEY
+            "Content-Type": "application/json",
+        };
 
-    while (true) {
-      // Fetch Locations data from Mobaro API with the current offset
-      const response = await fetch(`https://app.mobaro.com/api/customers/locations?offset=${offset}`);
-      const locationsData = await response.json();
+        const response = await fetch("https://app.mobaro.com/api/customers/locations", {
+            method: "GET",
+            headers: headers,
+        });
 
-      if (locationsData.length === 0) {
-        // No more data, break the loop
-        break;
-      }
+        if (!response.ok) {
+            throw new Error(`Error fetching location data: ${response.statusText}`);
+        }
 
-      allLocations = allLocations.concat(locationsData);
-      offset += 128; // Increase offset for the next request
+        const locationsData = await response.json();
+
+        return {
+            statusCode: 200,
+            body: JSON.stringify(locationsData),
+        };
+    } catch (error) {
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ error: error.message }),
+        };
     }
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify(allLocations),
-    };
-  } catch (error) {
-    console.error("Error fetching Locations data:", error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: "Internal Server Error" }),
-    };
-  }
 };
