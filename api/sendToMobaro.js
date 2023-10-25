@@ -13,9 +13,9 @@ app.post("/api/sendToMobaro", async (req, res) => {
             assignees: "users/112899-C",
             start: new Date(req.body.startDate).toISOString(),
             end: new Date(req.body.completionDate).toISOString(),
-            target: "locations/109477-A"
+            target: "locations/109477-A",
             // You can handle file uploads separately if needed
-            // attachments: req.file ? [req.file.buffer.toString("base64")] : [],
+            attachments: req.file ? [req.file.buffer.toString("base64")] : [],
         };
 
         console.log("Sending projectData to Mobaro API:", projectData);
