@@ -35,27 +35,23 @@ document.getElementById("projectForm").addEventListener("submit", function (even
   })
     .then((response) => response.json())
     .then((data) => {
-      // Handle the response from the server (e.g., show a success message)
       console.log(data);
     })
     .catch((error) => {
-      // Handle any errors
       console.error(error);
     });
 });
 
 async function populateLocationsDropdown() {
   const locationDropdown = document.getElementById("location");
-  locationDropdown.innerHTML = ""; // Clear existing options
+  locationDropdown.innerHTML = "";
 
-  const nameToIdMap = {}; // Create a mapping between name and ID
+  const nameToIdMap = {};
 
   try {
-    // Fetch location data from your server
-    const response = await fetch("/api/getLocations"); // Replace with your server endpoint
+    const response = await fetch("/api/getLocations");
     const locationsData = await response.json();
 
-    // Sort locationsData by name (alphabetically)
     locationsData.sort((a, b) => a.name.localeCompare(b.name));
 
     // Iterate through locationsData and create options for the dropdown
@@ -73,17 +69,14 @@ async function populateLocationsDropdown() {
     locationDropdown.addEventListener("change", (event) => {
       const selectedLocationName = event.target.value;
       const selectedLocationId = nameToIdMap[selectedLocationName];
-      // Now you can use selectedLocationId in your request
     });
   } catch (error) {
     console.error("Error fetching Locations data:", error);
   }
 }
 
-// Call the function to populate the Locations dropdown
 populateLocationsDropdown();
 
-// Add an event listener to the location dropdown
 const locationDropdown = document.getElementById("location");
 
 locationDropdown.addEventListener("change", (event) => {
@@ -103,10 +96,9 @@ locationDropdown.addEventListener("change", (event) => {
 });
 
 function generateFormattedDescription() {
-  // Get values from form fields
   const name = document.getElementById("name").value;
   const department = document.getElementById("department").value;
-  const userDescription = document.getElementById("description").value; // User-entered description
+  const userDescription = document.getElementById("description").value;
   const siteContact = document.getElementById("siteContact").value;
   const startDate = document.getElementById("startDate").value;
   const completionDate = document.getElementById("completionDate").value;
@@ -116,11 +108,8 @@ function generateFormattedDescription() {
   const projectCode = document.getElementById("projectCode").value;
   const projectBudget = document.getElementById("projectBudget").value;
   const locationDropdown = document.getElementById("location");
-  const selectedLocationName = locationDropdown.value; // Get the selected location name
-
-  // Use the name-to-ID mapping to get the corresponding ID
+  const selectedLocationName = locationDropdown.value;
   const selectedLocationId = nameToIdMap[selectedLocationName];
-
   const formattedDescription = `
         Name: ${name}
         Department: ${department}
