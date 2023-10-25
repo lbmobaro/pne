@@ -1,25 +1,45 @@
-const fetch = require("node-fetch");
+const fetchLocations = async (offset, limit) => {
+  const headers = {
+    "x-api-key": process.env.MOBARO_API_KEY,
+  };
+
+  const response = await fetch(`https://app.mobaro.com/api/customers/locations?offset=${offset}&limit=${limit}`, {
+    method: "GET",
+    headers: headers,
+  });
+
+  if (!response.ok) {
+    throw new Error(`Error fetching location data: ${response.statusText}`);
+  }
+
+  const locationsData = await response.json();
+
+  return locationsData.items; // Return only the locations
+};
 
 module.exports = async (event, context) => {
   try {
-    const headers = {
-      "x-api-key": process.env.MOBARO_API_KEY,
-    };
+    const allLocations = [];
+    let offset = 0;
+    const limit = 128; // Adjust the limit as needed
 
-    const response = await fetch("https://app.mobaro.com/api/customers/locations", {
-      method: "GET",
-      headers: headers,
-    });
+    // Fetch locations in chunks until all are retrieved
+    while (true) {
+      const locationsChunk = await fetchLocations(offset, limit);
 
-    if (!response.ok) {
-      throw new Error(`Error fetching location data: ${response.statusText}`);
+      if (locationsChunk.length === 0) {
+        // No more locations to fetch
+        break;
+      }
+
+      allLocations.push(...locationsChunk);
+      offset += limit;
     }
 
-    const locationsData = await response.json();
-
+    // Now you have all locations in the allLocations array
     // Create a mapping between name and ID
     const nameToIdMap = {};
-    locationsData.items.forEach((location) => {
+    allLocations.forEach((location) => {
       nameToIdMap[location.name] = location.id;
     });
 
@@ -40,4 +60,3 @@ module.exports = async (event, context) => {
     };
   }
 };
-
