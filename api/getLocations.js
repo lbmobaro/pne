@@ -4,7 +4,6 @@ exports.handler = async (event, context) => {
     try {
         const headers = {
             "x-api-key": process.env.MOBARO_API_KEY
-            "Content-Type": "application/json",
         };
 
         const response = await fetch("https://app.mobaro.com/api/customers/locations", {
