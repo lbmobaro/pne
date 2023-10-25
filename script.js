@@ -8,7 +8,8 @@ document.getElementById("projectForm").addEventListener("submit", function (even
   const formData = {
     name: document.getElementById("name").value,
     department: document.getElementById("department").value,
-    attachments: document.getElementById("attachments").files[0], // Handle file uploads separately if needed
+    userDescription: document.getElementById("description").value,
+    attachments: document.getElementById("attachments").files[0],
     siteContact: document.getElementById("siteContact").value,
     startDate: document.getElementById("startDate").value,
     completionDate: document.getElementById("completionDate").value,
