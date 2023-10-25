@@ -61,15 +61,15 @@ function generateFormattedDescription() {
   const formattedDescription = {
     Name: name,
     Department: department,
-    "User Description": userDescription,
-    "Site Contact": siteContact,
-    "Start Date": startDate,
-    "End Date": completionDate,
-    "GL Code": glCode,
-    "Cost Center Code": costCenterCode,
-    "Cost Unit Code": costUnitCode,
-    "Project Code": projectCode,
-    "Project Budget": projectBudget,
+    User Description: userDescription,
+    Site Contact: siteContact,
+    Start Date: startDate,
+    End Date: completionDate,
+    GL Code: glCode,
+    Cost Center Cod: costCenterCode,
+    Cost Unit Code: costUnitCode,
+    Project Cod: projectCode,
+    Project Budget: projectBudget,
   };
 
   return formattedDescription;
