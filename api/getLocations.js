@@ -1,45 +1,42 @@
-const fetchLocations = async (offset, limit) => {
-  const headers = {
-    "x-api-key": process.env.MOBARO_API_KEY,
-  };
-
-  const response = await fetch(`https://app.mobaro.com/api/customers/locations?offset=${offset}&limit=${limit}`, {
-    method: "GET",
-    headers: headers,
-  });
-
-  if (!response.ok) {
-    throw new Error(`Error fetching location data: ${response.statusText}`);
-  }
-
-  const locationsData = await response.json();
-
-  return locationsData.items; // Return only the locations
-};
+const fetch = require("node-fetch");
 
 module.exports = async (event, context) => {
   try {
-    const allLocations = [];
-    let offset = 0;
-    const limit = 128; // Adjust the limit as needed
+    const headers = {
+      "x-api-key": process.env.MOBARO_API_KEY,
+    };
 
-    // Fetch locations in chunks until all are retrieved
-    while (true) {
-      const locationsChunk = await fetchLocations(offset, limit);
+    // Array to hold the promises for fetching location data
+    const locationPromises = [];
 
-      if (locationsChunk.length === 0) {
-        // No more locations to fetch
-        break;
-      }
-
-      allLocations.push(...locationsChunk);
-      offset += limit;
+    // Define the offsets and the number of requests you want to make in parallel
+    const numRequests = 5; // You can adjust this number as needed
+    for (let offset = 0; offset < numRequests * 128; offset += 128) {
+      // Push each promise into the array
+      locationPromises.push(
+        fetch(`https://app.mobaro.com/api/customers/locations?offset=${offset}`, {
+          method: "GET",
+          headers: headers,
+        })
+      );
     }
 
-    // Now you have all locations in the allLocations array
+    // Use Promise.all to wait for all requests to complete
+    const responses = await Promise.all(locationPromises);
+
+    // Process the responses and aggregate the data
+    const locationsData = [];
+    for (const response of responses) {
+      if (!response.ok) {
+        throw new Error(`Error fetching location data: ${response.statusText}`);
+      }
+      const locationData = await response.json();
+      locationsData.push(...locationData.items);
+    }
+
     // Create a mapping between name and ID
     const nameToIdMap = {};
-    allLocations.forEach((location) => {
+    locationsData.forEach((location) => {
       nameToIdMap[location.name] = location.id;
     });
 
