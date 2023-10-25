@@ -20,21 +20,15 @@ module.exports = async (event, context) => {
 
     const locationsData = await response.json();
 
-    // Create a mapping between name and ID
-    const nameToIdMap = {};
-    locationsData.items.forEach((location) => {
-      nameToIdMap[location.name] = location.id;
-    });
-
-    // Retrieve the selected location name from the request (modify as needed)
-    const selectedLocationName = event.queryStringParameters.target;
-
-    // Use the name-to-ID mapping to get the corresponding ID
-    const selectedLocationId = nameToIdMap[selectedLocationName];
+    // Create an array to hold location objects with name and id
+    const locationList = locationsData.items.map((location) => ({
+      name: location.name,
+      id: location.id,
+    }));
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ target: selectedLocationId }), // Return the ID as the target
+      body: JSON.stringify(locationList), // Return an array of location objects
     };
   } catch (error) {
     return {
