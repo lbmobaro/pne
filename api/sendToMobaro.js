@@ -9,12 +9,11 @@ app.post("/api/sendToMobaro", async (req, res) => {
     try {
         const projectData = {
             name: req.body.userDescription,
-            description: req.body.formattedDescription, // Use the user-entered description as is
-            assignees: "users/112899-C",
+            description: req.body.formattedDescription,
+            assignees: ["users/112899-C"],
             target: "locations/109477-A",
             start: new Date(req.body.startDate).toISOString(),
             end: new Date(req.body.completionDate).toISOString(),
-            // You can handle file uploads separately if needed
             attachments: req.file ? [req.file.buffer.toString("base64")] : [],
         };
 
