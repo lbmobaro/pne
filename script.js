@@ -18,6 +18,7 @@ document.getElementById("projectForm").addEventListener("submit", function (even
     costUnitCode: document.getElementById("costUnitCode").value,
     projectCode: document.getElementById("projectCode").value,
     projectBudget: document.getElementById("projectBudget").value,
+    
     formattedDescription: formattedDescription,
   };
 
@@ -95,6 +96,8 @@ function generateFormattedDescription() {
   const costUnitCode = document.getElementById("costUnitCode").value;
   const projectCode = document.getElementById("projectCode").value;
   const projectBudget = document.getElementById("projectBudget").value;
+  const locationDropdown = document.getElementById("location");
+  const selectedLocationId = locationDropdown.value;
 
   const formattedDescription = `
         Name: ${name}
