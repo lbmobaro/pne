@@ -43,6 +43,45 @@ document.getElementById("projectForm").addEventListener("submit", function (even
     });
 });
 
+// Function to fetch and populate Locations dropdown
+async function populateLocationsDropdown() {
+  const locationDropdown = document.getElementById("location");
+  locationDropdown.innerHTML = ""; // Clear existing options
+
+  try {
+    let offset = 0;
+    let allLocations = [];
+
+    while (true) {
+      // Fetch Locations data from Mobaro API with the current offset
+      const response = await fetch(`https://app.mobaro.com/api/customers/locations?offset=${offset}`);
+      const locationsData = await response.json();
+
+      if (locationsData.length === 0) {
+        // No more data, break the loop
+        break;
+      }
+
+      allLocations = allLocations.concat(locationsData);
+      offset += 128; // Increase offset for the next request
+    }
+
+    // Iterate through allLocations and create options for the dropdown
+    allLocations.forEach((location) => {
+      const option = document.createElement("option");
+      option.value = location.id; // Set the value to the location id
+      option.textContent = location.name; // Display the location name
+      locationDropdown.appendChild(option);
+    });
+  } catch (error) {
+    console.error("Error fetching Locations data:", error);
+  }
+}
+
+// Call the function to populate the Locations dropdown
+populateLocationsDropdown();
+
+
 function generateFormattedDescription() {
   // Get values from form fields
   const name = document.getElementById("name").value;
