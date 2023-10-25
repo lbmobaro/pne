@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-exports.handler = async (event, context) => {
+module.exports = async (event, context) => {
   try {
     const headers = {
       "x-api-key": process.env.MOBARO_API_KEY,
@@ -40,3 +40,4 @@ exports.handler = async (event, context) => {
     };
   }
 };
+
