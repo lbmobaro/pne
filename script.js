@@ -1,49 +1,10 @@
-document.getElementById("projectForm").addEventListener("submit", function(event) {
+document.getElementById("projectForm").addEventListener("submit", function (event) {
     event.preventDefault();
 
-    // Generate the formatted description based on form input values
-    const formattedDescription = generateFormattedDescription();
-
-    const formData = new FormData();
-    formData.append("name", document.getElementById("name").value);
-    formData.append("department", document.getElementById("department").value);
-    formData.append("attachments", document.getElementById("attachments").files[0]);
-    formData.append("siteContact", document.getElementById("siteContact").value);
-    formData.append("startDate", document.getElementById("startDate").value);
-    formData.append("completionDate", document.getElementById("completionDate").value);
-    formData.append("glCode", document.getElementById("glCode").value);
-    formData.append("costCenterCode", document.getElementById("costCenterCode").value);
-    formData.append("costUnitCode", document.getElementById("costUnitCode").value);
-    formData.append("projectCode", document.getElementById("projectCode").value);
-    formData.append("projectBudget", document.getElementById("projectBudget").value);
-
-    // Append the generated formatted description to the FormData
-    formData.append("formattedDescription", formattedDescription);
-
-    // Append the file input to the FormData
-    const fileInput = document.getElementById("attachments");
-    formData.append("attachment", fileInput.files[0]);
-
-    fetch("/api/sendToMobaro", {
-        method: "POST",
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Handle the response from the server (e.g., show a success message)
-        console.log(data);
-    })
-    .catch(error => {
-        // Handle any errors
-        console.error(error);
-    });
-});
-
-function generateFormattedDescription() {
     // Get values from form fields
     const name = document.getElementById("name").value;
     const department = document.getElementById("department").value;
-    const userDescription = document.getElementById("description").value; // User-entered description
+    const userDescription = document.getElementById("description").value; // Ensure the correct ID
     const siteContact = document.getElementById("siteContact").value;
     const startDate = document.getElementById("startDate").value;
     const completionDate = document.getElementById("completionDate").value;
@@ -53,9 +14,9 @@ function generateFormattedDescription() {
     const projectCode = document.getElementById("projectCode").value;
     const projectBudget = document.getElementById("projectBudget").value;
 
-    // Create the formatted description with bold titles and input values
-    const formattedDescription = 
-        `Name: ${name}
+    // Generate the formatted description
+    const formattedDescription = `
+        Name: ${name}
         Department: ${department}
         User Description: ${userDescription}
         Site Contact: ${siteContact}
@@ -65,7 +26,40 @@ function generateFormattedDescription() {
         Cost Center Code: ${costCenterCode}
         Cost Unit Code: ${costUnitCode}
         Project Code: ${projectCode}
-        Project Budget: ${projectBudget}`;
+        Project Budget: ${projectBudget}
+    `;
 
-    return formattedDescription;
-}
+    // Create FormData and append data
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("department", department);
+    formData.append("attachments", document.getElementById("attachments").files[0]);
+    formData.append("siteContact", siteContact);
+    formData.append("startDate", startDate);
+    formData.append("completionDate", completionDate);
+    formData.append("glCode", glCode);
+    formData.append("costCenterCode", costCenterCode);
+    formData.append("costUnitCode", costUnitCode);
+    formData.append("projectCode", projectCode);
+    formData.append("projectBudget", projectBudget);
+    formData.append("formattedDescription", formattedDescription);
+
+    // Append the file input to the FormData
+    const fileInput = document.getElementById("attachments");
+    formData.append("attachment", fileInput.files[0]);
+
+    // Make the fetch request
+    fetch("/api/sendToMobaro", {
+        method: "POST",
+        body: formData,
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        // Handle the response from the server (e.g., show a success message)
+        console.log(data);
+    })
+    .catch((error) => {
+        // Handle any errors
+        console.error(error);
+    });
+});
