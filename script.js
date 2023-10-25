@@ -48,17 +48,32 @@ async function populateLocationsDropdown() {
   const locationDropdown = document.getElementById("location");
   locationDropdown.innerHTML = ""; // Clear existing options
 
+  const nameToIdMap = {}; // Create a mapping between name and ID
+
   try {
     // Fetch location data from your server
     const response = await fetch("/api/getLocations"); // Replace with your server endpoint
     const locationsData = await response.json();
 
+    // Sort locationsData by name (alphabetically)
+    locationsData.sort((a, b) => a.name.localeCompare(b.name));
+
     // Iterate through locationsData and create options for the dropdown
     locationsData.forEach((location) => {
       const option = document.createElement("option");
-      option.value = location.id; // Set the value to the location id
+      option.value = location.name; // Set the value to the location name
       option.textContent = location.name; // Display the location name
       locationDropdown.appendChild(option);
+
+      // Store the mapping between name and ID
+      nameToIdMap[location.name] = location.id;
+    });
+
+    // Add an event listener to the dropdown to capture the selected location name
+    locationDropdown.addEventListener("change", (event) => {
+      const selectedLocationName = event.target.value;
+      const selectedLocationId = nameToIdMap[selectedLocationName];
+      // Now you can use selectedLocationId in your request
     });
   } catch (error) {
     console.error("Error fetching Locations data:", error);
@@ -67,6 +82,7 @@ async function populateLocationsDropdown() {
 
 // Call the function to populate the Locations dropdown
 populateLocationsDropdown();
+
 
 function generateFormattedDescription() {
   // Get values from form fields
