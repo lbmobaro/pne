@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 app.post("/api/sendToMobaro", async (req, res) => {
     try {
         const projectData = {
-            name: req.body.description,
+            name: req.body.userDescription,
             description: req.body.formattedDescription, // Use the user-entered description as is
             assignees: "users/112899-C",
             target: "locations/109477-A",
