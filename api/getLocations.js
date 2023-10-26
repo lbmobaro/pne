@@ -12,7 +12,6 @@ module.exports = async (event, context) => {
     });
 
     if (!response.ok) {
-      // Handle the error response (e.g., log or return an error message)
       console.error(`Error fetching location data: ${response.status} ${response.statusText}`);
       return {
         statusCode: response.status,
@@ -21,23 +20,20 @@ module.exports = async (event, context) => {
     }
 
     const locationsData = await response.json();
-
-    // Create a mapping between name and ID
     const nameToIdMap = {};
-    locationsData.items.forEach((location) => {
+
+    locationsData.items.forEach(location => {
       nameToIdMap[location.name] = location.id;
     });
 
-    // Retrieve the selected location name from the request (modify as needed)
     const selectedLocationName = event.queryStringParameters.target;
-
-    // Use the name-to-ID mapping to get the corresponding ID
     const selectedLocationId = nameToIdMap[selectedLocationName];
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ target: selectedLocationId }), // Return the ID as the target
+      body: JSON.stringify({ target: selectedLocationId }),
     };
+
   } catch (error) {
     return {
       statusCode: 500,
