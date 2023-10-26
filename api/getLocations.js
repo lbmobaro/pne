@@ -22,10 +22,27 @@ module.exports = async (event, context) => {
       };
     }
 
-    const locationsData = await response.json();
-    const nameToIdMap = {};
+    // Check the Content-Type of the response
+    const contentType = response.headers.get("content-type");
+    let responseData;
 
-    locationsData.items.forEach(location => {
+    if (contentType && contentType.includes("application/json")) {
+      responseData = await response.json();
+    } else if (contentType && contentType.includes("text/plain")) {
+      responseData = await response.text();
+      console.log(`Received plain text response: ${responseData}`);
+      // Handle the plain text data as necessary. For example, you might decide to log it, or send it back to the client.
+      // For the sake of this example, we'll return early:
+      return {
+        statusCode: 200,
+        body: responseData
+      };
+    } else {
+      throw new Error(`Unhandled response content type: ${contentType || "unknown"}`);
+    }
+
+    const nameToIdMap = {};
+    responseData.items.forEach(location => {
       nameToIdMap[location.name] = location.id;
     });
 
