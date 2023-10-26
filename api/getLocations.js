@@ -1,4 +1,7 @@
-const fetch = require("node-fetch");
+let fetch;
+import('node-fetch').then(module => {
+    fetch = module.default;
+});
 
 module.exports = async (event, context) => {
   try {
