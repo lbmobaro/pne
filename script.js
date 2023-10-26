@@ -18,6 +18,31 @@ document.getElementById("projectForm").addEventListener("submit", async function
   formData.append("projectBudget", document.getElementById("projectBudget").value);
   formData.append("formattedDescription", formattedDescription);
 
+  const nameToIdMap = {};
+  
+  async function populateLocationsDropdown() {
+    const locationDropdown = document.getElementById("location");
+    locationDropdown.innerHTML = "";
+  
+    try {
+      const response = await fetch("/api/getLocations");
+      const locationsData = await response.json();
+  
+      locationsData.sort((a, b) => a.name.localeCompare(b.name));
+  
+      locationsData.forEach(location => {
+        const option = document.createElement("option");
+        option.value = location.name;
+        option.textContent = location.name;
+        locationDropdown.appendChild(option);
+        nameToIdMap[location.name] = location.id;
+      });
+  
+    } catch (error) {
+      console.error("Error fetching Locations data:", error);
+    }
+  }
+  
   // Send the data to the server
   fetch("/api/sendToMobaro", {
     method: "POST",
@@ -31,31 +56,6 @@ document.getElementById("projectForm").addEventListener("submit", async function
     console.error(error);
   });
 });
-
-const nameToIdMap = {};
-
-async function populateLocationsDropdown() {
-  const locationDropdown = document.getElementById("location");
-  locationDropdown.innerHTML = "";
-
-  try {
-    const response = await fetch("/api/getLocations");
-    const locationsData = await response.json();
-
-    locationsData.sort((a, b) => a.name.localeCompare(b.name));
-
-    locationsData.forEach(location => {
-      const option = document.createElement("option");
-      option.value = location.name;
-      option.textContent = location.name;
-      locationDropdown.appendChild(option);
-      nameToIdMap[location.name] = location.id;
-    });
-
-  } catch (error) {
-    console.error("Error fetching Locations data:", error);
-  }
-}
 
 function generateFormattedDescription() {
   const name = document.getElementById("name").value;
