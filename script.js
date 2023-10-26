@@ -2,7 +2,7 @@ document.getElementById("projectForm").addEventListener("submit", async function
   event.preventDefault();
 
   const formattedDescription = generateFormattedDescription();
-  const formData = new FormData();  // Use FormData for sending files
+  const formData = new FormData();
 
   formData.append("name", document.getElementById("name").value);
   formData.append("department", document.getElementById("department").value);
@@ -17,32 +17,30 @@ document.getElementById("projectForm").addEventListener("submit", async function
   formData.append("projectCode", document.getElementById("projectCode").value);
   formData.append("projectBudget", document.getElementById("projectBudget").value);
   formData.append("formattedDescription", formattedDescription);
-  
+
   const selectedLocationName = document.getElementById("location").value;
   const selectedLocationId = nameToIdMap[selectedLocationName];
   formData.append("locationId", selectedLocationId);
 
-  // Display a loading spinner or some feedback to the user
-  // For simplicity, let's just disable the submit button
+  // Provide feedback: Disable the submit button
   const submitButton = document.querySelector("#projectForm button[type='submit']");
   submitButton.disabled = true;
 
   // Send the data to the server
   fetch("/api/sendToMobaro", {
     method: "POST",
-    body: formData  // Send formData
+    body: formData
   })
   .then(response => response.json())
   .then(data => {
     console.log(data);
-    // Optionally, give feedback about successful submission or navigate to another page
+    // Feedback on successful submission
   })
   .catch(error => {
     console.error(error);
-    // Display an error message to the user
+    alert("Error submitting form. Please try again.");
   })
   .finally(() => {
-    // Re-enable the submit button or hide the loading spinner
     submitButton.disabled = false;
   });
 });
@@ -55,8 +53,14 @@ async function populateLocationsDropdown() {
 
   try {
     const response = await fetch("/api/getLocations");
-    const locationsData = await response.json();
+    const responseText = await response.text();
 
+    // Ensure the response is JSON
+    if (!response.headers.get("content-type").includes("application/json")) {
+      throw new Error(`Expected JSON, but received ${response.headers.get("content-type")}. Response: ${responseText}`);
+    }
+
+    const locationsData = JSON.parse(responseText);
     locationsData.sort((a, b) => a.name.localeCompare(b.name));
 
     locationsData.forEach(location => {
@@ -69,7 +73,6 @@ async function populateLocationsDropdown() {
 
   } catch (error) {
     console.error("Error fetching Locations data:", error);
-    // Display an error message to the user
     alert("Error loading locations. Please try again later.");
   }
 }
