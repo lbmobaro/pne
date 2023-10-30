@@ -7,7 +7,7 @@ const upload = multer();
 
 app.use(express.json());
 
-app.post("/api/sendFileToMobaro", upload.single("fileData"), async (req, res) => {
+app.post("/api/createMobaroFile", upload.single("fileData"), async (req, res) => {
   try {
     const fileData = req.file; // This contains the uploaded file data
     const mobaroApiUrl = 'https://app.mobaro.com/api/customers/files/create'; // Replace with Mobaro API URL
