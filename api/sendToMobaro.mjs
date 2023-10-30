@@ -1,12 +1,12 @@
-import fetch from 'node-fetch'; // Use ESM import for node-fetch
+import fetch from 'node-fetch';
 
-import express from 'express'; // Use ESM import for express
-import bodyParser from 'body-parser'; // Use ESM import for body-parser
-import multer from 'multer'; // Use ESM import for multer
+import express from 'express';
+import bodyParser from 'body-parser';
+import multer from 'multer';
 
 const app = express();
 
-const upload = multer(); // Use multer's memory storage for handling file uploads
+const upload = multer();
 
 app.use(bodyParser.json());
 
