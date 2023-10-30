@@ -62,7 +62,7 @@ function generateFormattedDescription() {
             <div style="font-weight: bold;">Cost Center Code:</div>${costCenterCode}<br>
             <div style="font-weight: bold;">Cost Unit Code:</div>${costUnitCode}<br>
             <div style="font-weight: bold;">Project Code:</div>${projectCode}<br>
-            <div style="font-weight: bold;">Project Budget:</div>${projectBudget};
+            <div style="font-weight: bold;">Project Budget:</div>${projectBudget}`;
 }
 
 
@@ -78,6 +78,18 @@ document.getElementById("projectForm").addEventListener("submit", async function
 
   const formattedDescription = generateFormattedDescription();
   const formData = new FormData();
+
+  const currentDate = new Date();
+  currentDate.setHours(0, 0, 0, 0);
+
+  const startDateInput = document.getElementById("startDate");
+  const startDate = new Date(startDateInput.value);
+
+  if (startDate < currentDate) {
+    // Start date is in the past, show an error message
+    alert("Start date must be today or in the future.");
+    return; // Prevent form submission
+  }
 
   formData.append("name", document.getElementById("name").value);
   formData.append("department", document.getElementById("department").value);
