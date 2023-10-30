@@ -1,4 +1,5 @@
 const nameToIdMap = {}; // Create a global mapping between name and ID
+let highPriorityValue;
 
 async function populateLocationsDropdown() {
   const locationDropdown = document.getElementById("location");
