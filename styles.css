@@ -35,16 +35,28 @@ h1 {
 
 /* Form styles */
 form {
-    max-width: 100%; /* Make the form full width for smaller screens */
+    max-width: 400px;
     width: 100%;
     margin: 20px auto 0;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    display: grid; /* Use CSS Grid layout */
-    grid-template-columns: repeat(2, 1fr); /* Two columns */
-    grid-gap: 20px; /* Gap between columns */
+}
+
+/* Form row styles for two-column layout */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    align-items: center;
+}
+
+/* Responsive styles for form row */
+@media screen and (max-width: 600px) {
+    .form-row {
+        grid-template-columns: 1fr; /* Single column for smaller screens */
+    }
 }
 
 /* Form label styles */
@@ -61,6 +73,7 @@ select,
 input[type="file"] {
     width: 100%;
     padding: 10px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
@@ -74,7 +87,6 @@ input[type="file"] {
 
 /* Form submit button styles */
 button[type="submit"] {
-    grid-column: span 2; /* Make the button span both columns */
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -96,23 +108,6 @@ textarea,
 select,
 input[type="file"] {
     margin-bottom: 10px;
-}
-
-/* Responsive styles */
-@media screen and (max-width: 600px) {
-    form {
-        grid-template-columns: 1fr; /* Single column for smaller screens */
-    }
-    input[type="text"],
-    input[type="date"],
-    textarea,
-    select,
-    input[type="file"] {
-        font-size: 14px;
-    }
-    button[type="submit"] {
-        font-size: 16px;
-    }
 }
 
 /* Add focus styles for better accessibility */
