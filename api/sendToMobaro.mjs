@@ -19,9 +19,9 @@ app.post("/api/sendToMobaro", upload.single("attachments"), async (req, res) => 
             description: req.body.formattedDescription,
             assignees: ["users/112899-C"],
             target: req.body.locationId, // Use locationId from the form data
-            priority: req.body.highPriority,
             start: new Date(req.body.startDate).toISOString(),
             end: new Date(req.body.completionDate).toISOString(),
+            priority: req.body.highPriority,
             attachments: req.file ? [req.file.buffer.toString("base64")] : [],
         };
 
