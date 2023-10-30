@@ -104,10 +104,23 @@ document.getElementById("projectForm").addEventListener("submit", async function
 
   const attachmentsInput = document.getElementById("attachments");
 
+  // Handle file input change event
+  attachmentsInput.addEventListener("change", async (event) => {
+    if (attachmentsInput.files.length > 0) {
+      const attachmentFile = attachmentsInput.files[0];
+      try {
+        const mobaroFile = await createMobaroFile(attachmentFile);
+        // Append the created Mobaro file data to formData
+        formData.append("attachments", mobaroFile);
+      } catch (error) {
+        // Handle any errors that occur during file creation
+      }
+    }
+  });
+
   formData.append("name", document.getElementById("name").value);
   formData.append("department", document.getElementById("department").value);
   formData.append("userDescription", document.getElementById("description").value);
-  formData.append("attachments", attachmentsInput.files[0]); // Updated to use attachmentsInput
   formData.append("siteContact", document.getElementById("siteContact").value);
   formData.append("startDate", startDateInput.value);
   formData.append("completionDate", completionDateInput.value);
