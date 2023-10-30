@@ -101,28 +101,45 @@ document.getElementById("projectForm").addEventListener("submit", async function
   }
 
   const attachmentsInput = document.getElementById("attachments");
-  if (attachmentsInput.files.length > 0) {
-    const attachmentFile = attachmentsInput.files[0];
-    const attachmentData = new FormData();
-    attachmentData.append("fileData", attachmentFile); // The actual file
-    attachmentData.append("metadata", "Additional metadata for the file"); // Add any metadata you need
-    const createFileResponse = await fetch("/api/createMobaroFile", {
-      method: "POST",
-      body: attachmentData,
-    });
-
-    if (createFileResponse.ok) {
-      const fileIdentifierData = await createFileResponse.json();
-      const fileIdentifier = fileIdentifierData.fileIdentifier;
-
-      // Include the file identifier in your formData
-      formData.append("attachmentFileIdentifier", fileIdentifier);
-    } else {
-      console.error("Error creating file in Mobaro:", createFileResponse.statusText);
-      alert("Error creating file in Mobaro. Please try again.");
-      return;
+  
+  // Function to create a file in Mobaro
+  async function createMobaroFile(file) {
+    try {
+      const attachmentData = new FormData();
+      attachmentData.append("fileData", file); // The actual file
+      attachmentData.append("metadata", "Additional metadata for the file"); // Add any metadata you need
+      const createFileResponse = await fetch("/api/createMobaroFile", {
+        method: "POST",
+        body: attachmentData,
+      });
+  
+      if (createFileResponse.ok) {
+        const fileData = await createFileResponse.json();
+        console.log("File created in Mobaro:", fileData);
+        return fileData;
+      } else {
+        console.error("Error creating file in Mobaro:", createFileResponse.status, createFileResponse.statusText);
+        throw new Error("Error creating file in Mobaro.");
+      }
+    } catch (error) {
+      console.error("Error creating file in Mobaro:", error);
+      throw error;
     }
   }
+  
+  // Handle file input change event
+  attachmentsInput.addEventListener("change", async (event) => {
+    if (attachmentsInput.files.length > 0) {
+      const attachmentFile = attachmentsInput.files[0];
+      try {
+        const mobaroFile = await createMobaroFile(attachmentFile);
+        // Do something with the created file data, if needed
+      } catch (error) {
+        // Handle any errors that occur during file creation
+      }
+    }
+  });
+
 
   formData.append("name", document.getElementById("name").value);
   formData.append("department", document.getElementById("department").value);
