@@ -27,7 +27,6 @@ async function populateLocationsDropdown() {
     locationDropdown.addEventListener("change", (event) => {
       const selectedLocationName = event.target.value;
       const selectedLocationId = nameToIdMap[selectedLocationName];
-      // Now you can use selectedLocationId in your request
     });
   } catch (error) {
     console.error("Error fetching Locations data:", error);
@@ -103,7 +102,6 @@ document.getElementById("projectForm").addEventListener("submit", async function
   .then(response => response.json())
   .then(data => {
     console.log(data);
-    // Feedback on successful submission
   })
   .catch(error => {
     console.error(error);
