@@ -15,9 +15,7 @@ app.post("/api/sendToMobaro", upload.single("attachments"), async (req, res) => 
             name: req.body.userDescription,
             description: req.body.formattedDescription,
             assignees: ["users/112899-C"],
-            // Assuming you'll send the location's name and then fetch its ID server-side
-            // (You might need to adjust this part if you intend to send the ID directly)
-            target: req.body.locationName, // Adjust this as per your requirements
+            target: selectedLocationId,
             priority: req.body.highPriority,
             start: new Date(req.body.startDate).toISOString(),
             end: new Date(req.body.completionDate).toISOString(),
