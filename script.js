@@ -1,30 +1,25 @@
-const nameToIdMap = {}; // Create a global mapping between name and ID
+const nameToIdMap = {};
 let highPriorityValue;
 
 async function populateLocationsDropdown() {
   const locationDropdown = document.getElementById("location");
-  locationDropdown.innerHTML = ""; // Clear existing options
+  locationDropdown.innerHTML = "";
 
   try {
-    // Fetch location data from GitHub
     const response = await fetch('https://raw.githubusercontent.com/lbmobaro/pne/main/locations.json');
     const locationsData = await response.json();
 
-    // Sort locationsData by name (alphabetically)
     locationsData.sort((a, b) => a.name.localeCompare(b.name));
 
-    // Iterate through locationsData and create options for the dropdown
     locationsData.forEach((location) => {
       const option = document.createElement("option");
-      option.value = location.name; // Set the value to the location name
-      option.textContent = location.name; // Display the location name
+      option.value = location.name;
+      option.textContent = location.name;
       locationDropdown.appendChild(option);
 
-      // Store the mapping between name and ID
       nameToIdMap[location.name] = location.id;
     });
 
-    // Add an event listener to the dropdown to capture the selected location name
     locationDropdown.addEventListener("change", (event) => {
       const selectedLocationName = event.target.value;
       const selectedLocationId = nameToIdMap[selectedLocationName];
@@ -88,35 +83,53 @@ document.getElementById("projectForm").addEventListener("submit", async function
   yesterday.setDate(yesterday.getDate() - 1);
 
   if (startDate < yesterday) {
-    // Start date is in the past, show an error message
     alert("Start date must be today or in the future.");
-    return; // Prevent form submission
+    return;
   }
 
   const completionDateInput = document.getElementById("completionDate");
   const completionDate = new Date(completionDateInput.value);
 
   if (startDate >= completionDate) {
-    // Start date is not before completion date, show an error message
     alert("Start date must be before the completion date.");
-    return; // Prevent form submission
+    return;
   }
 
   const attachmentsInput = document.getElementById("attachments");
 
-  // Handle file input change event
-  attachmentsInput.addEventListener("change", async (event) => {
-    if (attachmentsInput.files.length > 0) {
-      const attachmentFile = attachmentsInput.files[0];
-      try {
-        const mobaroFile = await createMobaroFile(attachmentFile);
-        // Append the created Mobaro file data to formData
-        formData.append("attachments", mobaroFile);
-      } catch (error) {
-        // Handle any errors that occur during file creation
+  async function createMobaroFile(file) {
+    try {
+      const attachmentData = new FormData();
+      attachmentData.append("attachments", file);
+      attachmentData.append("metadata", "Additional metadata for the file");
+      const createFileResponse = await fetch("/api/createMobaroFile", {
+        method: "POST",
+        body: attachmentData,
+      });
+
+      if (createFileResponse.ok) {
+        const fileData = await createFileResponse.json();
+        console.log("File created in Mobaro:", fileData);
+        return fileData;
+      } else {
+        console.error("Error creating file in Mobaro:", createFileResponse.status, createFileResponse.statusText);
+        throw new Error("Error creating file in Mobaro.");
       }
+    } catch (error) {
+      console.error("Error creating file in Mobaro:", error);
+      throw error;
     }
-  });
+  }
+
+  if (attachmentsInput.files.length > 0) {
+    const attachmentFile = attachmentsInput.files[0];
+    try {
+      const mobaroFile = await createMobaroFile(attachmentFile);
+      formData.append("attachments", JSON.stringify(mobaroFile));
+    } catch (error) {
+      console.error("Error creating Mobaro file:", error);
+    }
+  }
 
   formData.append("name", document.getElementById("name").value);
   formData.append("department", document.getElementById("department").value);
@@ -136,11 +149,9 @@ document.getElementById("projectForm").addEventListener("submit", async function
   const selectedLocationId = nameToIdMap[selectedLocationName];
   formData.append("locationId", selectedLocationId);
 
-  // Provide feedback: Disable the submit button
   const submitButton = document.querySelector("#projectForm button[type='submit']");
   submitButton.disabled = true;
 
-  // Send the data to the server
   fetch("/api/sendToMobaro", {
     method: "POST",
     body: formData,
