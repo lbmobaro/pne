@@ -1,6 +1,7 @@
+import fetch from 'node-fetch';
+
 const express = require("express");
 const bodyParser = require("body-parser");
-const fetch = require("node-fetch");
 const multer = require("multer");
 const app = express();
 
