@@ -106,6 +106,7 @@ document.getElementById("projectForm").addEventListener("submit", async function
   async function createMobaroFile(file) {
     try {
       const attachmentData = new FormData();
+      attachmentData.append("attachments", document.getElementById("attachments").files[0]);
       attachmentData.append("fileData", file); // The actual file
       attachmentData.append("metadata", "Additional metadata for the file"); // Add any metadata you need
       const createFileResponse = await fetch("/api/createMobaroFile", {
