@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+const fetch = require('node-fetch'); // Use require for CommonJS
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -17,7 +17,7 @@ app.post("/api/sendToMobaro", upload.single("attachments"), async (req, res) => 
             name: req.body.userDescription,
             description: req.body.formattedDescription,
             assignees: ["users/112899-C"],
-            target: selectedLocationId,
+            target: req.body.locationId, // Use locationId from the form data
             priority: req.body.highPriority,
             start: new Date(req.body.startDate).toISOString(),
             end: new Date(req.body.completionDate).toISOString(),
