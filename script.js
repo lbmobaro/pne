@@ -100,6 +100,30 @@ document.getElementById("projectForm").addEventListener("submit", async function
     return; // Prevent form submission
   }
 
+  const attachmentsInput = document.getElementById("attachments");
+  if (attachmentsInput.files.length > 0) {
+    const attachmentFile = attachmentsInput.files[0];
+    const attachmentData = new FormData();
+    attachmentData.append("fileData", attachmentFile); // The actual file
+    attachmentData.append("metadata", "Additional metadata for the file"); // Add any metadata you need
+    const createFileResponse = await fetch("/api/createMobaroFile", {
+      method: "POST",
+      body: attachmentData,
+    });
+
+    if (createFileResponse.ok) {
+      const fileIdentifierData = await createFileResponse.json();
+      const fileIdentifier = fileIdentifierData.fileIdentifier;
+
+      // Include the file identifier in your formData
+      formData.append("attachmentFileIdentifier", fileIdentifier);
+    } else {
+      console.error("Error creating file in Mobaro:", createFileResponse.statusText);
+      alert("Error creating file in Mobaro. Please try again.");
+      return;
+    }
+  }
+
   formData.append("name", document.getElementById("name").value);
   formData.append("department", document.getElementById("department").value);
   formData.append("userDescription", document.getElementById("description").value);
