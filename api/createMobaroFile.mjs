@@ -11,7 +11,7 @@ app.post("/api/sendFileToMobaro", upload.single("fileData"), async (req, res) =>
   try {
     const fileData = req.file; // This contains the uploaded file data
     const mobaroApiUrl = 'https://app.mobaro.com/api/customers/files/create'; // Replace with Mobaro API URL
-    const mobaroApiKey = 'YOUR_MOBARO_API_KEY'; // Replace with your Mobaro API key
+    const mobaroApiKey = process.env.MOBARO_API_KEY;
 
     if (!fileData) {
       return res.status(400).json({ error: 'No file uploaded' });
