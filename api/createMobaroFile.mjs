@@ -12,7 +12,7 @@ async function createMobaroFile(fileByteArray, fileName) {
 
     // Construct the headers for the request
     const headers = {
-      "Authorization": process.env.MOBARO_API_KEY,
+      "x-api-key": process.env.MOBARO_API_KEY,
       "Content-Type": `multipart/form-data; boundary=${boundary}`,
     };
 
