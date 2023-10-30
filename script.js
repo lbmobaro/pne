@@ -94,6 +94,12 @@ document.getElementById("projectForm").addEventListener("submit", async function
     return; // Prevent form submission
   }
 
+  if (startDate >= completionDate) {
+    // Start date is not before completion date, show an error message
+    alert("Start date must be before the completion date.");
+    return; // Prevent form submission
+  }
+
   formData.append("name", document.getElementById("name").value);
   formData.append("department", document.getElementById("department").value);
   formData.append("userDescription", document.getElementById("description").value);
