@@ -1,38 +1,52 @@
-async function createMobaroFile(fileByteArray, fileName) {
+const fetch = require('node-fetch');
+const FormData = require('form-data');
+const fs = require('fs');
+
+async function createMobaroFile() {
   try {
-    // Generate a unique boundary string
-    const boundary = `------------------------${Math.random().toString(16)}`;
+    const attachmentsInput = document.getElementById('attachments');
+    const file = attachmentsInput.files[0]; // Get the first selected file
 
-    // Create a FormData object to construct the multipart/form-data request
+    if (!file) {
+      // Handle the case where no file is selected
+      console.error('No file selected.');
+      return;
+    }
+
+    // Get the file name and create a FormData object
+    const fileName = file.name;
     const formData = new FormData();
-
-    // Append the file data as a Blob with a custom filename
-    const blob = new Blob([new Uint8Array(fileByteArray)], { type: "application/octet-stream" });
-    formData.append("file", blob, fileName);
+    formData.append('File', file, { filename: fileName, contentType: file.type });
 
     // Construct the headers for the request
     const headers = {
-      "x-api-key": process.env.MOBARO_API_KEY,
-      "Content-Type": `multipart/form-data; boundary=${boundary}`,
+      Accept: 'text/plain',
+      ...formData.getHeaders(),
+      // Add any additional headers if needed
     };
 
     // Send the request to Mobaro
-    const response = await fetch("https://app.mobaro.com/api/customers/files/create", {
-      method: "POST",
+    const response = await fetch('https://app.mobaro.com/api/customers/files/create', {
+      method: 'POST',
       headers,
-      body: attachmentData,
+      body: formData,
     });
 
     if (response.ok) {
-      const fileData = await response.json();
-      console.log("File created in Mobaro:", fileData);
+      const fileData = await response.text(); // You can adjust this based on the expected response
+      console.log('File created in Mobaro:', fileData);
       return fileData;
     } else {
-      console.error("Error creating file in Mobaro:", response.status, response.statusText);
-      throw new Error("Error creating file in Mobaro.");
+      console.error('Error creating file in Mobaro:', response.status, response.statusText);
+      throw new Error('Error creating file in Mobaro.');
     }
   } catch (error) {
-    console.error("Error creating file in Mobaro:", error);
+    console.error('Error creating file in Mobaro:', error);
     throw error;
   }
 }
+
+// Attach an event listener to the "Attachments" input element to trigger the upload
+document.getElementById('attachments').addEventListener('change', () => {
+  createMobaroFile();
+});
