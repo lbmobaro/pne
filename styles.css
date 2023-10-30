@@ -26,8 +26,9 @@ body {
 /* Header styles */
 h1 {
     font-size: 28px;
+    font-weight: 700;
     margin-bottom: 20px;
-    color: #007bff;
+    color: #00254c;
     text-align: center;
 }
 
@@ -73,6 +74,7 @@ input[type="date"]:focus,
 textarea:focus,
 select:focus,
 input[type="file"]:focus {
+    font-family: 'Poppins', san-serif;
     outline: none;
     border-color: #007bff;
 }
