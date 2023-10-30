@@ -49,31 +49,37 @@ const nameToIdMap = {};
 
 async function populateLocationsDropdown() {
   const locationDropdown = document.getElementById("location");
-  locationDropdown.innerHTML = "";
+  locationDropdown.innerHTML = ""; // Clear existing options
+
+  const nameToIdMap = {}; // Create a mapping between name and ID
 
   try {
-    const response = await fetch("/api/getLocations");
-    const responseText = await response.text();
+    // Fetch location data from GitHub
+    const response = await fetch('https://github.com/lbmobaro/pne/edit/main/locations.json');
+    const locationsData = await response.json();
 
-    // Ensure the response is JSON
-    if (!response.headers.get("content-type").includes("application/json")) {
-      throw new Error(`Expected JSON, but received ${response.headers.get("content-type")}. Response: ${responseText}`);
-    }
-
-    const locationsData = JSON.parse(responseText);
+    // Sort locationsData by name (alphabetically)
     locationsData.sort((a, b) => a.name.localeCompare(b.name));
 
-    locationsData.forEach(location => {
+    // Iterate through locationsData and create options for the dropdown
+    locationsData.forEach((location) => {
       const option = document.createElement("option");
-      option.value = location.name;
-      option.textContent = location.name;
+      option.value = location.name; // Set the value to the location name
+      option.textContent = location.name; // Display the location name
       locationDropdown.appendChild(option);
+
+      // Store the mapping between name and ID
       nameToIdMap[location.name] = location.id;
     });
 
+    // Add an event listener to the dropdown to capture the selected location name
+    locationDropdown.addEventListener("change", (event) => {
+      const selectedLocationName = event.target.value;
+      const selectedLocationId = nameToIdMap[selectedLocationName];
+      // Now you can use selectedLocationId in your request
+    });
   } catch (error) {
     console.error("Error fetching Locations data:", error);
-    alert("Error loading locations. Please try again later.");
   }
 }
 
