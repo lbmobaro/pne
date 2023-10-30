@@ -85,7 +85,10 @@ document.getElementById("projectForm").addEventListener("submit", async function
   const startDateInput = document.getElementById("startDate");
   const startDate = new Date(startDateInput.value);
 
-  if (startDate < currentDate - 1) {
+  const yesterday = new Date(currentDate);
+  yesterday.setDate(yesterday.getDate() - 1);
+
+  if (startDate < yesterday) {
     // Start date is in the past, show an error message
     alert("Start date must be today or in the future.");
     return; // Prevent form submission
