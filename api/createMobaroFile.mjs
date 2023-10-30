@@ -1,7 +1,7 @@
-const fetch = require('node-fetch');
-const FormData = require('form-data');
-const fs = require('fs');
+// Import necessary modules using ES module syntax
+import fetch from 'node-fetch'; // Use 'node-fetch' for making HTTP requests in AWS Lambda
 
+// Your createMobaroFile function
 async function createMobaroFile() {
   try {
     const attachmentsInput = document.getElementById('attachments');
@@ -20,8 +20,9 @@ async function createMobaroFile() {
 
     // Construct the headers for the request
     const headers = {
-      "Content-Type": `multipart/form-data; boundary=${formData.getBoundary()}`,
-      "x-api-key": process.env.MOBARO_API_KEY,
+      Accept: 'text/plain',
+      'Content-Type': `multipart/form-data; boundary=${formData.getBoundary()}`,
+      // Add any additional headers if needed
     };
 
     // Send the request to Mobaro
@@ -45,7 +46,4 @@ async function createMobaroFile() {
   }
 }
 
-// Attach an event listener to the "Attachments" input element to trigger the upload
-document.getElementById('attachments').addEventListener('change', () => {
-  createMobaroFile();
-});
+export { createMobaroFile }; // Export your function for use in other modules
