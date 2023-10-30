@@ -1,0 +1,494 @@
+[
+ {
+  "id": "locations\/109036-A",
+  "name": "Atmosfear"
+ },
+ {
+  "id": "locations\/109037-A",
+  "name": "Balloon Explorers"
+ },
+ {
+  "id": "locations\/109479-A",
+  "name": "Big Bang"
+ },
+ {
+  "id": "locations\/113650-C",
+  "name": "Bloodshed Haunted House"
+ },
+ {
+  "id": "locations\/142917-C",
+  "name": "Bob's Fishing Hole"
+ },
+ {
+  "id": "locations\/142883-C",
+  "name": "Bombs Away"
+ },
+ {
+  "id": "locations\/142915-C",
+  "name": "Bonanza Shooting Gallery"
+ },
+ {
+  "id": "locations\/109477-A",
+  "name": "Bowler Roller"
+ },
+ {
+  "id": "locations\/109039-A",
+  "name": "Breakdance"
+ },
+ {
+  "id": "locations\/142923-C",
+  "name": "Buen Gusto Tacos & Totchos"
+ },
+ {
+  "id": "locations\/109040-A",
+  "name": "Bug Whirled"
+ },
+ {
+  "id": "locations\/109041-A",
+  "name": "Cap'n KC"
+ },
+ {
+  "id": "locations\/142871-C",
+  "name": "Carnevil Haunted House"
+ },
+ {
+  "id": "locations\/142899-C",
+  "name": "Carpentry Shop"
+ },
+ {
+  "id": "locations\/109042-A",
+  "name": "Choppers"
+ },
+ {
+  "id": "locations\/109487-A",
+  "name": "Clark #3"
+ },
+ {
+  "id": "locations\/109043-A",
+  "name": "Climbing Wall"
+ },
+ {
+  "id": "locations\/142906-C",
+  "name": "Clink-O"
+ },
+ {
+  "id": "locations\/142909-C",
+  "name": "Coaster Dogs"
+ },
+ {
+  "id": "locations\/109044-A",
+  "name": "Cool Cruzers"
+ },
+ {
+  "id": "locations\/109475-A",
+  "name": "Crossbow"
+ },
+ {
+  "id": "locations\/113651-C",
+  "name": "Darkness Haunted House"
+ },
+ {
+  "id": "locations\/109476-A",
+  "name": "Derby Downs"
+ },
+ {
+  "id": "locations\/109047-A",
+  "name": "Dizzy Drop"
+ },
+ {
+  "id": "locations\/109048-A",
+  "name": "Drop Zone"
+ },
+ {
+  "id": "locations\/139507-C",
+  "name": "Employee Lounge"
+ },
+ {
+  "id": "locations\/109049-A",
+  "name": "Enterprise"
+ },
+ {
+  "id": "locations\/142920-C",
+  "name": "Farm + Field"
+ },
+ {
+  "id": "locations\/113652-C",
+  "name": "Fear Haunted House"
+ },
+ {
+  "id": "locations\/142921-C",
+  "name": "Festival Programs Office"
+ },
+ {
+  "id": "locations\/109050-A",
+  "name": "Flume"
+ },
+ {
+  "id": "locations\/142922-C",
+  "name": "Food & Beverage Office"
+ },
+ {
+  "id": "locations\/113240-B",
+  "name": "Fright Nights"
+ },
+ {
+  "id": "locations\/142908-C",
+  "name": "Fundunkers"
+ },
+ {
+  "id": "locations\/142897-C",
+  "name": "Games Office"
+ },
+ {
+  "id": "locations\/143098-C",
+  "name": "Games Storage"
+ },
+ {
+  "id": "locations\/142891-C",
+  "name": "Gate 11"
+ },
+ {
+  "id": "locations\/142892-C",
+  "name": "Gate 12"
+ },
+ {
+  "id": "locations\/142893-C",
+  "name": "Gate 13"
+ },
+ {
+  "id": "locations\/142894-C",
+  "name": "Gate 14"
+ },
+ {
+  "id": "locations\/110673-A",
+  "name": "Gladiator"
+ },
+ {
+  "id": "locations\/109053-A",
+  "name": "Glass House"
+ },
+ {
+  "id": "locations\/109488-A",
+  "name": "Golf Cart"
+ },
+ {
+  "id": "locations\/142895-C",
+  "name": "Grounds Maintenance Trailer (Gate 11)"
+ },
+ {
+  "id": "locations\/142910-C",
+  "name": "Guest Services"
+ },
+ {
+  "id": "locations\/109482-A",
+  "name": "Hang Time"
+ },
+ {
+  "id": "locations\/109054-A",
+  "name": "Haunted Mansion"
+ },
+ {
+  "id": "locations\/109056-A",
+  "name": "Hell's Gate"
+ },
+ {
+  "id": "locations\/109055-A",
+  "name": "Hellevator"
+ },
+ {
+  "id": "locations\/109481-A",
+  "name": "Hi-Striker"
+ },
+ {
+  "id": "locations\/109057-A",
+  "name": "Honeybee Express"
+ },
+ {
+  "id": "locations\/109491-A",
+  "name": "HVAC Unit \/ Playland Admin"
+ },
+ {
+  "id": "locations\/109497-A",
+  "name": "HVAC Unit \/ Playland Central"
+ },
+ {
+  "id": "locations\/109501-A",
+  "name": "HVAC Unit \/ Playland Lowerline"
+ },
+ {
+  "id": "locations\/109504-A",
+  "name": "HVAC Units \/ Playland Triple O's"
+ },
+ {
+  "id": "locations\/142902-C",
+  "name": "Ice cream U scream"
+ },
+ {
+  "id": "locations\/142904-C",
+  "name": "Jumpshot"
+ },
+ {
+  "id": "locations\/142903-C",
+  "name": "KC's Shoppe"
+ },
+ {
+  "id": "locations\/113654-C",
+  "name": "Keepers Doll House"
+ },
+ {
+  "id": "locations\/109058-A",
+  "name": "Kettle Creek Mine Coaster"
+ },
+ {
+  "id": "locations\/142285-A",
+  "name": "Launch Coaster"
+ },
+ {
+  "id": "locations\/142918-C",
+  "name": "Lowerline Shops"
+ },
+ {
+  "id": "locations\/142900-C",
+  "name": "Machine Shop"
+ },
+ {
+  "id": "locations\/113655-C",
+  "name": "Materia Medica Haunted House"
+ },
+ {
+  "id": "locations\/109059-A",
+  "name": "Merry-Go-Round"
+ },
+ {
+  "id": "locations\/140282-A",
+  "name": "One Ball"
+ },
+ {
+  "id": "locations\/113041-B",
+  "name": "Other"
+ },
+ {
+  "id": "locations\/109469-A",
+  "name": "Pacific Adventure Golf"
+ },
+ {
+  "id": "locations\/140409-C",
+  "name": "Park Closing"
+ },
+ {
+  "id": "locations\/140408-C",
+  "name": "Park Opening"
+ },
+ {
+  "id": "locations\/109061-A",
+  "name": "Pirate Ship"
+ },
+ {
+  "id": "locations\/142907-C",
+  "name": "Pizza Pizza"
+ },
+ {
+  "id": "locations\/113808-B",
+  "name": "Playland Admin Office"
+ },
+ {
+  "id": "locations\/143445-A",
+  "name": "Playland Ride Operations Office"
+ },
+ {
+  "id": "locations\/109490-A",
+  "name": "Playland Truck (F150)"
+ },
+ {
+  "id": "locations\/109473-A",
+  "name": "PlayQuarters"
+ },
+ {
+  "id": "locations\/109478-A",
+  "name": "Pop Gun"
+ },
+ {
+  "id": "locations\/109474-A",
+  "name": "Pop-A-Lot"
+ },
+ {
+  "id": "locations\/109062-A",
+  "name": "Revelation"
+ },
+ {
+  "id": "locations\/142919-C",
+  "name": "Ride Side Bar"
+ },
+ {
+  "id": "locations\/141746-A",
+  "name": "Ring Toss"
+ },
+ {
+  "id": "locations\/109471-A",
+  "name": "Rising Waters"
+ },
+ {
+  "id": "locations\/109063-A",
+  "name": "Rock-N-Cars"
+ },
+ {
+  "id": "locations\/142905-C",
+  "name": "Roll-A-Ball"
+ },
+ {
+  "id": "locations\/109064-A",
+  "name": "Roller Coaster"
+ },
+ {
+  "id": "locations\/109485-A",
+  "name": "S45 Zoom Boom"
+ },
+ {
+  "id": "locations\/109484-A",
+  "name": "S85 Zoom Boom"
+ },
+ {
+  "id": "locations\/109489-A",
+  "name": "Scissorlift"
+ },
+ {
+  "id": "locations\/109065-A",
+  "name": "Scrambler"
+ },
+ {
+  "id": "locations\/109066-A",
+  "name": "Sea to Sky"
+ },
+ {
+  "id": "locations\/142898-C",
+  "name": "Sign Shop"
+ },
+ {
+  "id": "locations\/109470-A",
+  "name": "Skybender"
+ },
+ {
+  "id": "locations\/109067-A",
+  "name": "Super Slide"
+ },
+ {
+  "id": "locations\/142884-C",
+  "name": "Surf Baskets"
+ },
+ {
+  "id": "locations\/142916-C",
+  "name": "Tat's Temporary Tattoos"
+ },
+ {
+  "id": "locations\/109068-A",
+  "name": "Tea Cups"
+ },
+ {
+  "id": "locations\/109038-A",
+  "name": "The Beast"
+ },
+ {
+  "id": "locations\/109051-A",
+  "name": "The Flutterbye"
+ },
+ {
+  "id": "locations\/142321-A",
+  "name": "The Void Haunted House"
+ },
+ {
+  "id": "locations\/142911-C",
+  "name": "Triple O's"
+ },
+ {
+  "id": "locations\/142885-C",
+  "name": "Tuff Guys"
+ },
+ {
+  "id": "locations\/143097-C",
+  "name": "Warehouse \/ Fun Factory"
+ },
+ {
+  "id": "locations\/109502-A",
+  "name": "Washroom \/ Mens \/ Playland Lowerline"
+ },
+ {
+  "id": "locations\/141802-A",
+  "name": "Washroom \/ Mens \/ Playland Mainline"
+ },
+ {
+  "id": "locations\/109503-A",
+  "name": "Washroom \/ Womens \/ Playland Lowerline"
+ },
+ {
+  "id": "locations\/141803-A",
+  "name": "Washroom \/ Womens \/ Playland Mainline"
+ },
+ {
+  "id": "locations\/109492-A",
+  "name": "Washroom 1 \/ GM Office"
+ },
+ {
+  "id": "locations\/109498-A",
+  "name": "Washroom 1 \/ Staff"
+ },
+ {
+  "id": "locations\/109493-A",
+  "name": "Washroom 2 \/ Admin"
+ },
+ {
+  "id": "locations\/109500-A",
+  "name": "Washroom 2 \/ CHQ"
+ },
+ {
+  "id": "locations\/109499-A",
+  "name": "Washroom 2 \/ Staff"
+ },
+ {
+  "id": "locations\/109494-A",
+  "name": "Washroom 3 \/ Admin"
+ },
+ {
+  "id": "locations\/109495-A",
+  "name": "Washroom 4 \/ Ride Ops"
+ },
+ {
+  "id": "locations\/109496-A",
+  "name": "Washroom 5 \/ Shop"
+ },
+ {
+  "id": "locations\/109508-A",
+  "name": "Washrooms \/ Mens \/ Playland Kiddieland"
+ },
+ {
+  "id": "locations\/109506-A",
+  "name": "Washrooms \/ Mens \/ Playland Triple O's"
+ },
+ {
+  "id": "locations\/109507-A",
+  "name": "Washrooms \/ Womens \/ Playland Kiddieland"
+ },
+ {
+  "id": "locations\/109505-A",
+  "name": "Washrooms \/ Womens \/ Playland Triple O's"
+ },
+ {
+  "id": "locations\/109070-A",
+  "name": "Westcoast Wheel"
+ },
+ {
+  "id": "locations\/109472-A",
+  "name": "Whac-A-Mole"
+ },
+ {
+  "id": "locations\/142896-C",
+  "name": "What The Fudge"
+ },
+ {
+  "id": "locations\/142901-C",
+  "name": "Wokin' on Sunshine"
+ },
+ {
+  "id": "locations\/109486-A",
+  "name": "Z60 Zoom Boom"
+ }
+]
