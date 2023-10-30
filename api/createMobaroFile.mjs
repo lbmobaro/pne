@@ -20,9 +20,8 @@ async function createMobaroFile() {
 
     // Construct the headers for the request
     const headers = {
-      Accept: 'text/plain',
-      'Content-Type': `multipart/form-data; boundary=${formData.getBoundary()}`,
-      // Add any additional headers if needed
+      "Content-Type": `multipart/form-data; boundary=${formData.getBoundary()}`,
+      "x-api-key": process.env.MOBARO_API_KEY,
     };
 
     // Send the request to Mobaro
