@@ -1,61 +1,69 @@
-import express from 'express';
-import multer from 'multer';
-import fetch from 'node-fetch';
-
-const app = express();
-const upload = multer();
-
-app.use(express.json());
-
-app.post("/api/createMobaroFile", upload.single("fileData"), async (req, res) => {
+async function createMobaroFile(file) {
   try {
-    const fileData = req.file; // This contains the uploaded file data
-    const mobaroApiUrl = 'https://app.mobaro.com/api/customers/files/create'; // Replace with Mobaro API URL
-    const mobaroApiKey = process.env.MOBARO_API_KEY;
+    // Generate a unique boundary string
+    const boundary = 'mobaro-file-boundary-' + Date.now();
 
-    if (!fileData) {
-      return res.status(400).json({ error: 'No file uploaded' });
-    }
+    // Build the request body
+    const body = [];
+    body.push(`--${boundary}`);
+    body.push(`Content-Disposition: form-data; name="fileData"; filename="${file.name}"`);
+    body.push('Content-Type: application/octet-stream'); // Use the appropriate content type
 
-    // Convert the file buffer to a binary string
-    const fileBinaryString = fileData.buffer.toString("binary");
+    // Read the file as binary data
+    const fileData = await readFileAsBinary(file);
 
-    // Construct the headers for the Mobaro API request
+    // Encode the binary data as ISO-8859-1
+    const iso8859Data = new TextEncoder('iso-8859-1').encode(fileData);
+
+    // Add the binary data to the request body
+    body.push('');
+    body.push(iso8859Data);
+
+    // Add boundary for the end of the part
+    body.push(`--${boundary}--`);
+    
+    // Join the body parts with CRLF
+    const requestBody = body.join('\r\n');
+
     const headers = {
-      "x-api-key": mobaroApiKey,
-      "Content-Type": "application/json",
+      'Content-Type': `multipart/form-data; boundary=${boundary}`,
     };
 
-    // Construct the request body for creating the file in Mobaro
-    const mobaroFileData = {
-      file: fileBinaryString,
-      filename: fileData.originalname, // Include the filename if needed
-      // Add any other required fields here
-    };
-
-    // Send the file to Mobaro
-    const response = await fetch(mobaroApiUrl, {
+    const createFileResponse = await fetch("https://app.mobaro.com/api/customers/files/create", {
       method: "POST",
+      body: requestBody,
       headers: headers,
-      body: JSON.stringify(mobaroFileData),
     });
 
-    if (response.ok) {
-      // File successfully sent to Mobaro
-      res.json({ message: "File sent to Mobaro successfully!" });
+    if (createFileResponse.ok) {
+      const fileData = await createFileResponse.json();
+      console.log("File created in Mobaro:", fileData);
+      return fileData;
     } else {
-      const responseBody = await response.text();
-      console.error(`Error response from Mobaro API: ${response.status} ${response.statusText}`);
-      console.error(`Response Body: ${responseBody}`);
-      res.status(response.status).json({ error: "Error sending file to Mobaro." });
+      console.error(
+        "Error creating file in Mobaro:",
+        createFileResponse.status,
+        createFileResponse.statusText
+      );
+      throw new Error("Error creating file in Mobaro.");
     }
   } catch (error) {
-    console.error("Error sending file to Mobaro:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error("Error creating file in Mobaro:", error);
+    throw error;
   }
-});
+}
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+// Function to read a file as binary data
+function readFileAsBinary(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      if (event.target && event.target.result) {
+        resolve(event.target.result);
+      } else {
+        reject(new Error("Failed to read file as binary data."));
+      }
+    };
+    reader.readAsBinaryString(file);
+  });
+}
