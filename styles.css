@@ -35,13 +35,16 @@ h1 {
 
 /* Form styles */
 form {
-    max-width: 400px;
+    max-width: 100%; /* Make the form full width for smaller screens */
     width: 100%;
     margin: 20px auto 0;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
+    display: grid; /* Use CSS Grid layout */
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    grid-gap: 20px; /* Gap between columns */
 }
 
 /* Form label styles */
@@ -58,7 +61,6 @@ select,
 input[type="file"] {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
@@ -72,6 +74,7 @@ input[type="file"] {
 
 /* Form submit button styles */
 button[type="submit"] {
+    grid-column: span 2; /* Make the button span both columns */
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -97,12 +100,8 @@ input[type="file"] {
 
 /* Responsive styles */
 @media screen and (max-width: 600px) {
-    .container {
-        max-width: 100%;
-        padding: 10px;
-    }
     form {
-        max-width: 100%;
+        grid-template-columns: 1fr; /* Single column for smaller screens */
     }
     input[type="text"],
     input[type="date"],
