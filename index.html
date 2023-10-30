@@ -4,58 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Information Form</title>
-    <link rel="stylesheet" href="styles.css"> <!-- You can create a CSS file for styling -->
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file for styling -->
 </head>
 <body>
-    <form id="projectForm">
-        <label for="name">Name *</label>
-        <input type="text" id="name" name="name" required>
-    
-        <label for="department">Department *</label>
-        <input type="text" id="department" name="department" required>
+    <div class="container">
+        <h1>Project Information Form</h1>
+        <form id="projectForm">
+            <div class="form-row">
+                <label for="name">Name *</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-row">
+                <label for="department">Department *</label>
+                <input type="text" id="department" name="department" required>
+            </div>
+            <div class="form-row">
+                <label for="highPriority">High Priority:</label>
+                <input type="checkbox" id="highPriority" name="highPriority">
+            </div>
+            <div class="form-row">
+                <label for="location">Location:</label>
+                <select id="location" name="location">
+                    <!-- Options will be dynamically populated using JavaScript -->
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="description">Description of work required *</label>
+                <textarea id="description" name="description" required></textarea>
+            </div>
+            <div class="form-row">
+                <label for="attachments">Attachments (map/photos)</label>
+                <input type="file" id="attachments" name="attachments">
+            </div>
+            <div class="form-row">
+                <label for="siteContact">Site Contact *</label>
+                <input type="text" id="siteContact" name="siteContact" required>
+            </div>
+            <div class="form-row">
+                <label for="startDate">Earliest Start Date *</label>
+                <input type="date" id="startDate" name="startDate" required>
+            </div>
+            <div class="form-row">
+                <label for="completionDate">Completion Date *</label>
+                <input type="date" id="completionDate" name="completionDate" required>
+            </div>
+            <div class="form-row">
+                <label for="glCode">GL Code *</label>
+                <input type="text" id="glCode" name="glCode" required>
+            </div>
+            <div class="form-row">
+                <label for="costCenterCode">Cost Center Code</label>
+                <input type="text" id="costCenterCode" name="costCenterCode">
+            </div>
+            <div class="form-row">
+                <label for="costUnitCode">Cost Unit Code</label>
+                <input type="text" id="costUnitCode" name="costUnitCode">
+            </div>
+            <div class="form-row">
+                <label for="projectCode">Project Code *</label>
+                <input type="text" id="projectCode" name="projectCode" required>
+            </div>
+            <div class="form-row">
+                <label for="projectBudget">Project Budget *</label>
+                <input type="text" id="projectBudget" name="projectBudget" required>
+            </div>
+            <div class="form-row">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
 
-        <label for="highPriority">High Priority:</label>
-        <input type="checkbox" id="highPriority" name="highPriority">
-        
-        <label for="location">Location:</label>
-        <select id="location" name="location">
-          <!-- Options will be dynamically populated using JavaScript -->
-        </select>
-    
-        <label for="description">Description of work required *</label>
-        <textarea id="description" name="description" required></textarea>
-    
-        <label for="attachments">Attachments (map/photos)</label>
-        <input type="file" id="attachments" name="attachments">
-    
-        <label for="siteContact">Site Contact *</label>
-        <input type="text" id="siteContact" name="siteContact" required>
-    
-        <label for="startDate">Earliest Start Date *</label>
-        <input type="date" id="startDate" name="startDate" required>
-    
-        <label for="completionDate">Completion Date *</label>
-        <input type="date" id="completionDate" name="completionDate" required>
-    
-        <label for="glCode">GL Code *</label>
-        <input type="text" id="glCode" name="glCode" required>
-    
-        <label for="costCenterCode">Cost Center Code</label>
-        <input type="text" id="costCenterCode" name="costCenterCode">
-    
-        <label for="costUnitCode">Cost Unit Code</label>
-        <input type="text" id="costUnitCode" name="costUnitCode">
-    
-        <label for="projectCode">Project Code *</label>
-        <input type="text" id="projectCode" name="projectCode" required>
-    
-        <label for="projectBudget">Project Budget *</label>
-        <input type="text" id="projectBudget" name="projectBudget" required>
-    
-        <button type="submit">Submit</button>
-    </form>
-
-
-    <script src="script.js"></script> <!-- You can create a JavaScript file for client-side logic -->
+    <script src="script.js"></script> <!-- Link to your JavaScript file for client-side logic -->
 </body>
 </html>
