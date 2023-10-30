@@ -1,53 +1,61 @@
 import express from 'express';
+import multer from 'multer';
 import fetch from 'node-fetch';
 
 const app = express();
-const port = process.env.PORT || 3000;
+const upload = multer();
 
-// Middleware to parse JSON requests
 app.use(express.json());
 
-// POST route to create a file in Mobaro
-app.post('/api/createMobaroFile', async (req, res) => {
+app.post("/api/sendFileToMobaro", upload.single("fileData"), async (req, res) => {
   try {
-    // Ensure you have the MOBARO_API_KEY stored securely in your environment variables
-    const mobaroApiKey = process.env.MOBARO_API_KEY;
+    const fileData = req.file; // This contains the uploaded file data
+    const mobaroApiUrl = 'https://app.mobaro.com/api/customers/files/create'; // Replace with Mobaro API URL
+    const mobaroApiKey = 'YOUR_MOBARO_API_KEY'; // Replace with your Mobaro API key
 
-    // Check if the API key is available
-    if (!mobaroApiKey) {
-      return res.status(500).json({ error: 'MOBARO_API_KEY is not configured.' });
+    if (!fileData) {
+      return res.status(400).json({ error: 'No file uploaded' });
     }
 
-    // You can use req.body to get data from the client (e.g., file data and metadata)
-    const fileData = req.body.fileData;
-    const metadata = req.body.metadata;
+    // Convert the file buffer to a binary string
+    const fileBinaryString = fileData.buffer.toString("binary");
 
-    // Make a request to create the file in Mobaro
-    const createFileResponse = await fetch('https://app.mobaro.com/api/customers/files/create', {
-      method: 'POST',
-      headers: {
-        'x-api-key': mobaroApiKey,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ fileData, metadata }),
+    // Construct the headers for the Mobaro API request
+    const headers = {
+      "x-api-key": mobaroApiKey,
+      "Content-Type": "application/json",
+    };
+
+    // Construct the request body for creating the file in Mobaro
+    const mobaroFileData = {
+      file: fileBinaryString,
+      filename: fileData.originalname, // Include the filename if needed
+      // Add any other required fields here
+    };
+
+    // Send the file to Mobaro
+    const response = await fetch(mobaroApiUrl, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(mobaroFileData),
     });
 
-    if (createFileResponse.ok) {
-      // Parse the response and send the file identifier (e.g., file ID) back to the client
-      const fileData = await createFileResponse.json();
-      const fileIdentifier = fileData.fileIdentifier;
-
-      res.json({ fileIdentifier });
+    if (response.ok) {
+      // File successfully sent to Mobaro
+      res.json({ message: "File sent to Mobaro successfully!" });
     } else {
-      const errorMessage = await createFileResponse.text();
-      res.status(createFileResponse.status).json({ error: errorMessage });
+      const responseBody = await response.text();
+      console.error(`Error response from Mobaro API: ${response.status} ${response.statusText}`);
+      console.error(`Response Body: ${responseBody}`);
+      res.status(response.status).json({ error: "Error sending file to Mobaro." });
     }
   } catch (error) {
-    console.error('Error creating file in Mobaro:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.error("Error sending file to Mobaro:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
