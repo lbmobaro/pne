@@ -1,69 +1,38 @@
-async function createMobaroFile(file) {
+async function createMobaroFile(fileByteArray, fileName) {
   try {
     // Generate a unique boundary string
-    const boundary = 'mobaro-file-boundary-' + Date.now();
+    const boundary = `------------------------${Math.random().toString(16)}`;
 
-    // Build the request body
-    const body = [];
-    body.push(`--${boundary}`);
-    body.push(`Content-Disposition: form-data; name="fileData"; filename="${file.name}"`);
-    body.push('Content-Type: application/octet-stream'); // Use the appropriate content type
+    // Create a FormData object to construct the multipart/form-data request
+    const formData = new FormData();
 
-    // Read the file as binary data
-    const fileData = await readFileAsBinary(file);
+    // Append the file data as a Blob with a custom filename
+    const blob = new Blob([new Uint8Array(fileByteArray)], { type: "application/octet-stream" });
+    formData.append("file", blob, fileName);
 
-    // Encode the binary data as ISO-8859-1
-    const iso8859Data = new TextEncoder('iso-8859-1').encode(fileData);
-
-    // Add the binary data to the request body
-    body.push('');
-    body.push(iso8859Data);
-
-    // Add boundary for the end of the part
-    body.push(`--${boundary}--`);
-    
-    // Join the body parts with CRLF
-    const requestBody = body.join('\r\n');
-
+    // Construct the headers for the request
     const headers = {
-      'Content-Type': `multipart/form-data; boundary=${boundary}`,
+      "Authorization": process.env.MOBARO_API_KEY,
+      "Content-Type": `multipart/form-data; boundary=${boundary}`,
     };
 
-    const createFileResponse = await fetch("https://app.mobaro.com/api/customers/files/create", {
+    // Send the request to Mobaro
+    const response = await fetch("https://app.mobaro.com/api/customers/files/create", {
       method: "POST",
-      body: requestBody,
-      headers: headers,
+      headers,
+      body: formData,
     });
 
-    if (createFileResponse.ok) {
-      const fileData = await createFileResponse.json();
+    if (response.ok) {
+      const fileData = await response.json();
       console.log("File created in Mobaro:", fileData);
       return fileData;
     } else {
-      console.error(
-        "Error creating file in Mobaro:",
-        createFileResponse.status,
-        createFileResponse.statusText
-      );
+      console.error("Error creating file in Mobaro:", response.status, response.statusText);
       throw new Error("Error creating file in Mobaro.");
     }
   } catch (error) {
     console.error("Error creating file in Mobaro:", error);
     throw error;
   }
-}
-
-// Function to read a file as binary data
-function readFileAsBinary(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      if (event.target && event.target.result) {
-        resolve(event.target.result);
-      } else {
-        reject(new Error("Failed to read file as binary data."));
-      }
-    };
-    reader.readAsBinaryString(file);
-  });
 }
