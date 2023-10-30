@@ -11,6 +11,8 @@ app.use(bodyParser.json());
 
 app.post("/api/sendToMobaro", upload.single("attachments"), async (req, res) => {
     try {
+        console.log("Received POST request to /api/sendToMobaro with body:", req.body);
+
         const projectData = {
             name: req.body.userDescription,
             description: req.body.formattedDescription,
@@ -36,6 +38,8 @@ app.post("/api/sendToMobaro", upload.single("attachments"), async (req, res) => 
         });
 
         const responseBody = await response.text();
+
+        console.log("Received response from Mobaro API:", response.status, response.statusText, responseBody);
 
         if (response.ok) {
             res.json({ message: "Project data sent to Mobaro successfully!" });
