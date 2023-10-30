@@ -55,7 +55,7 @@ async function populateLocationsDropdown() {
 
   try {
     // Fetch location data from GitHub
-    const response = await fetch('https://github.com/lbmobaro/pne/blob/ceb9135f6b5814e90f42375d31380e66e1413b83/locations.json');
+    const response = await fetch('https://raw.githubusercontent.com/lbmobaro/pne/main/locations.json');
     const locationsData = await response.json();
 
     // Sort locationsData by name (alphabetically)
