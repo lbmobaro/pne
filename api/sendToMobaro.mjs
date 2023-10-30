@@ -22,7 +22,7 @@ app.post("/api/sendToMobaro", upload.single("attachments"), async (req, res) => 
             start: new Date(req.body.startDate).toISOString(),
             end: new Date(req.body.completionDate).toISOString(),
             priority: req.body.highPriority,
-            attachments: req.file ? [req.file.buffer.toString("base64")] : [],
+            attachments: req.body.attachmentFileIdentifier ? [req.body.attachmentFileIdentifier] : [],
         };
 
         console.log("Sending projectData to Mobaro API:", projectData);
