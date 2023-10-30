@@ -1,8 +1,9 @@
-const fetch = require('node-fetch'); // Use require for CommonJS
+import fetch from 'node-fetch'; // Use ESM import for node-fetch
 
-const express = require("express");
-const bodyParser = require("body-parser");
-const multer = require("multer");
+import express from 'express'; // Use ESM import for express
+import bodyParser from 'body-parser'; // Use ESM import for body-parser
+import multer from 'multer'; // Use ESM import for multer
+
 const app = express();
 
 const upload = multer(); // Use multer's memory storage for handling file uploads
