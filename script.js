@@ -35,42 +35,41 @@ async function populateLocationsDropdown() {
 }
 
 function generateFormattedDescription() {
-    const name = document.getElementById("name").value;
-    const department = document.getElementById("department").value;
-    const userDescription = document.getElementById("description").value;
-    const siteContact = document.getElementById("siteContact").value;
-    const startDate = document.getElementById("startDate").value;
-    const completionDate = document.getElementById("completionDate").value;
-    const glCode = document.getElementById("glCode").value;
-    const costCenterCode = document.getElementById("costCenterCode").value;
-    const costUnitCode = document.getElementById("costUnitCode").value;
-    const projectCode = document.getElementById("projectCode").value;
-    const projectBudget = document.getElementById("projectBudget").value;
-    const locationDropdown = document.getElementById("location");
-    const selectedLocationName = locationDropdown.value;
-    const selectedLocationId = nameToIdMap[selectedLocationName];
-    const highPriorityCheckbox = document.getElementById("highPriority");
-    const highPriorityValue = highPriorityCheckbox.checked ? "true" : "false";
+  const name = document.getElementById("name").value;
+  const department = document.getElementById("department").value;
+  const userDescription = document.getElementById("description").value;
+  const siteContact = document.getElementById("siteContact").value;
+  const startDate = document.getElementById("startDate").value;
+  const completionDate = document.getElementById("completionDate").value;
+  const glCode = document.getElementById("glCode").value;
+  const costCenterCode = document.getElementById("costCenterCode").value;
+  const costUnitCode = document.getElementById("costUnitCode").value;
+  const projectCode = document.getElementById("projectCode").value;
+  const projectBudget = document.getElementById("projectBudget").value;
+  const locationDropdown = document.getElementById("location");
+  const selectedLocationName = locationDropdown.value;
+  const selectedLocationId = nameToIdMap[selectedLocationName];
+  const highPriorityCheckbox = document.getElementById("highPriority");
+  highPriorityValue = highPriorityCheckbox.checked ? "true" : "false";
 
-    return `<div style="font-weight: bold;">Name:</div>${name}<br>
-            <div style="font-weight: bold;">Department:</div>${department}<br>
-            <div style="font-weight: bold;">User Description:</div>${userDescription}<br>
-            <div style="font-weight: bold;">Site Contact:</div>${siteContact}<br>
-            <div style="font-weight: bold;">Start Date:</div>${startDate}<br>
-            <div style="font-weight: bold;">End Date:</div>${completionDate}<br>
-            <div style="font-weight: bold;">GL Code:</div>${glCode}<br>
-            <div style="font-weight: bold;">Cost Center Code:</div>${costCenterCode}<br>
-            <div style="font-weight: bold;">Cost Unit Code:</div>${costUnitCode}<br>
-            <div style="font-weight: bold;">Project Code:</div>${projectCode}<br>
-            <div style="font-weight: bold;">Project Budget:</div>${projectBudget}`;
+  return `<div style="font-weight: bold;">Name:</div>${name}<br>
+          <div style="font-weight: bold;">Department:</div>${department}<br>
+          <div style="font-weight: bold;">User Description:</div>${userDescription}<br>
+          <div style="font-weight: bold;">Site Contact:</div>${siteContact}<br>
+          <div style="font-weight: bold;">Start Date:</div>${startDate}<br>
+          <div style="font-weight: bold;">End Date:</div>${completionDate}<br>
+          <div style="font-weight: bold;">GL Code:</div>${glCode}<br>
+          <div style="font-weight: bold;">Cost Center Code:</div>${costCenterCode}<br>
+          <div style="font-weight: bold;">Cost Unit Code:</div>${costUnitCode}<br>
+          <div style="font-weight: bold;">Project Code:</div>${projectCode}<br>
+          <div style="font-weight: bold;">Project Budget:</div>${projectBudget}`;
 }
-
 
 populateLocationsDropdown();
 
 const highPriorityCheckbox = document.getElementById("highPriority");
 highPriorityCheckbox.addEventListener("change", (event) => {
-  highPriorityValue = event.target.checked;
+  highPriorityValue = event.target.checked ? "true" : "false";
 });
 
 document.getElementById("projectForm").addEventListener("submit", async function (event) {
@@ -94,6 +93,9 @@ document.getElementById("projectForm").addEventListener("submit", async function
     return; // Prevent form submission
   }
 
+  const completionDateInput = document.getElementById("completionDate");
+  const completionDate = new Date(completionDateInput.value);
+
   if (startDate >= completionDate) {
     // Start date is not before completion date, show an error message
     alert("Start date must be before the completion date.");
@@ -101,54 +103,14 @@ document.getElementById("projectForm").addEventListener("submit", async function
   }
 
   const attachmentsInput = document.getElementById("attachments");
-  
-  // Function to create a file in Mobaro
-  async function createMobaroFile(file) {
-    try {
-      const attachmentData = new FormData();
-      attachmentData.append("attachments", document.getElementById("attachments").files[0]);
-      attachmentData.append("fileData", file); // The actual file
-      attachmentData.append("metadata", "Additional metadata for the file"); // Add any metadata you need
-      const createFileResponse = await fetch("/api/createMobaroFile", {
-        method: "POST",
-        body: attachmentData,
-      });
-  
-      if (createFileResponse.ok) {
-        const fileData = await createFileResponse.json();
-        console.log("File created in Mobaro:", fileData);
-        return fileData;
-      } else {
-        console.error("Error creating file in Mobaro:", createFileResponse.status, createFileResponse.statusText);
-        throw new Error("Error creating file in Mobaro.");
-      }
-    } catch (error) {
-      console.error("Error creating file in Mobaro:", error);
-      throw error;
-    }
-  }
-  
-  // Handle file input change event
-  attachmentsInput.addEventListener("change", async (event) => {
-    if (attachmentsInput.files.length > 0) {
-      const attachmentFile = attachmentsInput.files[0];
-      try {
-        const mobaroFile = await createMobaroFile(attachmentFile);
-        // Do something with the created file data, if needed
-      } catch (error) {
-        // Handle any errors that occur during file creation
-      }
-    }
-  });
-
 
   formData.append("name", document.getElementById("name").value);
   formData.append("department", document.getElementById("department").value);
   formData.append("userDescription", document.getElementById("description").value);
-  formData.append("attachments", document.getElementById("attachments").files[0]);
+  formData.append("attachments", attachmentsInput.files[0]); // Updated to use attachmentsInput
   formData.append("siteContact", document.getElementById("siteContact").value);
-  formData.append("startDate", document.getElementById("startDate").value);
-  formData.append("completionDate", document.getElementById("completionDate").value);
+  formData.append("startDate", startDateInput.value);
+  formData.append("completionDate", completionDateInput.value);
   formData.append("highPriority", highPriorityValue);
   formData.append("glCode", document.getElementById("glCode").value);
   formData.append("costCenterCode", document.getElementById("costCenterCode").value);
@@ -168,17 +130,17 @@ document.getElementById("projectForm").addEventListener("submit", async function
   // Send the data to the server
   fetch("/api/sendToMobaro", {
     method: "POST",
-    body: formData
+    body: formData,
   })
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-  })
-  .catch(error => {
-    console.error(error);
-    alert("Error submitting form. Please try again.");
-  })
-  .finally(() => {
-    submitButton.disabled = false;
-  });
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.error(error);
+      alert("Error submitting form. Please try again.");
+    })
+    .finally(() => {
+      submitButton.disabled = false;
+    });
 });
