@@ -50,7 +50,7 @@ function generateFormattedDescription() {
     const selectedLocationName = locationDropdown.value;
     const selectedLocationId = nameToIdMap[selectedLocationName];
     const highPriorityCheckbox = document.getElementById("highPriority");
-    const highPriorityValue = highPriorityCheckbox.checked;
+    const highPriorityValue = highPriorityCheckbox.checked ? "true" : "false";
 
     return `<div style="font-weight: bold;">Name:</div>${name}<br>
             <div style="font-weight: bold;">Department:</div>${department}<br>
