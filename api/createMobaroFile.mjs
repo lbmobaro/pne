@@ -20,7 +20,7 @@ async function createMobaroFile(fileByteArray, fileName) {
     const response = await fetch("https://app.mobaro.com/api/customers/files/create", {
       method: "POST",
       headers,
-      body: formData,
+      body: attachmentData,
     });
 
     if (response.ok) {
