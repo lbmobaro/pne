@@ -1,57 +1,8 @@
-document.getElementById("projectForm").addEventListener("submit", async function (event) {
-  event.preventDefault();
-
-  const formattedDescription = generateFormattedDescription();
-  const formData = new FormData();
-
-  formData.append("name", document.getElementById("name").value);
-  formData.append("department", document.getElementById("department").value);
-  formData.append("userDescription", document.getElementById("description").value);
-  formData.append("attachments", document.getElementById("attachments").files[0]);
-  formData.append("siteContact", document.getElementById("siteContact").value);
-  formData.append("startDate", document.getElementById("startDate").value);
-  formData.append("completionDate", document.getElementById("completionDate").value);
-  formData.append("glCode", document.getElementById("glCode").value);
-  formData.append("costCenterCode", document.getElementById("costCenterCode").value);
-  formData.append("costUnitCode", document.getElementById("costUnitCode").value);
-  formData.append("projectCode", document.getElementById("projectCode").value);
-  formData.append("projectBudget", document.getElementById("projectBudget").value);
-  formData.append("formattedDescription", formattedDescription);
-
-  const selectedLocationName = document.getElementById("location").value;
-  const selectedLocationId = nameToIdMap[selectedLocationName];
-  formData.append("locationId", selectedLocationId);
-
-  // Provide feedback: Disable the submit button
-  const submitButton = document.querySelector("#projectForm button[type='submit']");
-  submitButton.disabled = true;
-
-  // Send the data to the server
-  fetch("/api/sendToMobaro", {
-    method: "POST",
-    body: formData
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-    // Feedback on successful submission
-  })
-  .catch(error => {
-    console.error(error);
-    alert("Error submitting form. Please try again.");
-  })
-  .finally(() => {
-    submitButton.disabled = false;
-  });
-});
-
-const nameToIdMap = {};
+const nameToIdMap = {}; // Create a global mapping between name and ID
 
 async function populateLocationsDropdown() {
   const locationDropdown = document.getElementById("location");
   locationDropdown.innerHTML = ""; // Clear existing options
-
-  const nameToIdMap = {}; // Create a mapping between name and ID
 
   try {
     // Fetch location data from GitHub
@@ -116,3 +67,50 @@ function generateFormattedDescription() {
 }
 
 populateLocationsDropdown();
+
+document.getElementById("projectForm").addEventListener("submit", async function (event) {
+  event.preventDefault();
+
+  const formattedDescription = generateFormattedDescription();
+  const formData = new FormData();
+
+  formData.append("name", document.getElementById("name").value);
+  formData.append("department", document.getElementById("department").value);
+  formData.append("userDescription", document.getElementById("description").value);
+  formData.append("attachments", document.getElementById("attachments").files[0]);
+  formData.append("siteContact", document.getElementById("siteContact").value);
+  formData.append("startDate", document.getElementById("startDate").value);
+  formData.append("completionDate", document.getElementById("completionDate").value);
+  formData.append("glCode", document.getElementById("glCode").value);
+  formData.append("costCenterCode", document.getElementById("costCenterCode").value);
+  formData.append("costUnitCode", document.getElementById("costUnitCode").value);
+  formData.append("projectCode", document.getElementById("projectCode").value);
+  formData.append("projectBudget", document.getElementById("projectBudget").value);
+  formData.append("formattedDescription", formattedDescription);
+
+  const selectedLocationName = document.getElementById("location").value;
+  const selectedLocationId = nameToIdMap[selectedLocationName];
+  formData.append("locationId", selectedLocationId);
+
+  // Provide feedback: Disable the submit button
+  const submitButton = document.querySelector("#projectForm button[type='submit']");
+  submitButton.disabled = true;
+
+  // Send the data to the server
+  fetch("/api/sendToMobaro", {
+    method: "POST",
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    // Feedback on successful submission
+  })
+  .catch(error => {
+    console.error(error);
+    alert("Error submitting form. Please try again.");
+  })
+  .finally(() => {
+    submitButton.disabled = false;
+  });
+});
