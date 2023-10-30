@@ -48,6 +48,8 @@ function generateFormattedDescription() {
     const locationDropdown = document.getElementById("location");
     const selectedLocationName = locationDropdown.value;
     const selectedLocationId = nameToIdMap[selectedLocationName];
+    const highPriorityCheckbox = document.getElementById("highPriority");
+    const highPriorityValue = highPriorityCheckbox.checked;
 
     return `<div style="font-weight: bold;">Name:</div>${name}<br>
             <div style="font-weight: bold;">Department:</div>${department}<br>
@@ -79,6 +81,7 @@ document.getElementById("projectForm").addEventListener("submit", async function
   formData.append("siteContact", document.getElementById("siteContact").value);
   formData.append("startDate", document.getElementById("startDate").value);
   formData.append("completionDate", document.getElementById("completionDate").value);
+  formData.append("highPriority", highPriorityValue);
   formData.append("glCode", document.getElementById("glCode").value);
   formData.append("costCenterCode", document.getElementById("costCenterCode").value);
   formData.append("costUnitCode", document.getElementById("costUnitCode").value);
