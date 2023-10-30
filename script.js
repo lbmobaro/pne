@@ -35,34 +35,35 @@ async function populateLocationsDropdown() {
 }
 
 function generateFormattedDescription() {
-  const name = document.getElementById("name").value;
-  const department = document.getElementById("department").value;
-  const userDescription = document.getElementById("description").value;
-  const siteContact = document.getElementById("siteContact").value;
-  const startDate = document.getElementById("startDate").value;
-  const completionDate = document.getElementById("completionDate").value;
-  const glCode = document.getElementById("glCode").value;
-  const costCenterCode = document.getElementById("costCenterCode").value;
-  const costUnitCode = document.getElementById("costUnitCode").value;
-  const projectCode = document.getElementById("projectCode").value;
-  const projectBudget = document.getElementById("projectBudget").value;
-  const locationDropdown = document.getElementById("location");
-  const selectedLocationName = locationDropdown.value;
-  const selectedLocationId = nameToIdMap[selectedLocationName];
+    const name = document.getElementById("name").value;
+    const department = document.getElementById("department").value;
+    const userDescription = document.getElementById("description").value;
+    const siteContact = document.getElementById("siteContact").value;
+    const startDate = document.getElementById("startDate").value;
+    const completionDate = document.getElementById("completionDate").value;
+    const glCode = document.getElementById("glCode").value;
+    const costCenterCode = document.getElementById("costCenterCode").value;
+    const costUnitCode = document.getElementById("costUnitCode").value;
+    const projectCode = document.getElementById("projectCode").value;
+    const projectBudget = document.getElementById("projectBudget").value;
+    const locationDropdown = document.getElementById("location");
+    const selectedLocationName = locationDropdown.value;
+    const selectedLocationId = nameToIdMap[selectedLocationName];
 
-  return `Name: ${name}
-    Department: ${department}
-    User Description: ${userDescription}
-    Site Contact: ${siteContact}
-    Start Date: ${startDate}
-    End Date: ${completionDate}
-    GL Code: ${glCode}
-    Cost Center Code: ${costCenterCode}
-    Cost Unit Code: ${costUnitCode}
-    Project Code: ${projectCode}
-    Project Budget: ${projectBudget}
-    Location ID: ${selectedLocationId}`;
+    return `<div style="font-weight: bold;">Name:</div>${name}<br>
+            <div style="font-weight: bold;">Department:</div>${department}<br>
+            <div style="font-weight: bold;">User Description:</div>${userDescription}<br>
+            <div style="font-weight: bold;">Site Contact:</div>${siteContact}<br>
+            <div style="font-weight: bold;">Start Date:</div>${startDate}<br>
+            <div style="font-weight: bold;">End Date:</div>${completionDate}<br>
+            <div style="font-weight: bold;">GL Code:</div>${glCode}<br>
+            <div style="font-weight: bold;">Cost Center Code:</div>${costCenterCode}<br>
+            <div style="font-weight: bold;">Cost Unit Code:</div>${costUnitCode}<br>
+            <div style="font-weight: bold;">Project Code:</div>${projectCode}<br>
+            <div style="font-weight: bold;">Project Budget:</div>${projectBudget}<br>
+            <div style="font-weight: bold;">Location ID:</div>${selectedLocationId}`;
 }
+
 
 populateLocationsDropdown();
 
