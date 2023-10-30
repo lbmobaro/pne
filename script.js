@@ -69,6 +69,10 @@ function generateFormattedDescription() {
 
 populateLocationsDropdown();
 
+highPriorityCheckbox.addEventListener("change", (event) => {
+  highPriorityValue = event.target.checked;
+});
+
 document.getElementById("projectForm").addEventListener("submit", async function (event) {
   event.preventDefault();
 
