@@ -81,7 +81,7 @@ input[type="file"]:focus {
 
 /* Form submit button styles */
 button[type="submit"] {
-    background-color: #007bff;
+    background-color: #00254c;
     color: #fff;
     border: none;
     border-radius: 5px;
