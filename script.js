@@ -50,8 +50,7 @@ function generateFormattedDescription() {
   const selectedLocationName = locationDropdown.value;
   const selectedLocationId = nameToIdMap[selectedLocationName];
 
-  return `
-    Name: ${name}
+  return `Name: ${name}
     Department: ${department}
     User Description: ${userDescription}
     Site Contact: ${siteContact}
@@ -62,8 +61,7 @@ function generateFormattedDescription() {
     Cost Unit Code: ${costUnitCode}
     Project Code: ${projectCode}
     Project Budget: ${projectBudget}
-    Location ID: ${selectedLocationId}
-  `;
+    Location ID: ${selectedLocationId}`;
 }
 
 populateLocationsDropdown();
