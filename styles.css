@@ -105,6 +105,7 @@ button[type="submit"]:hover {
     position: relative;
 }
 
+/* Style the tooltip */
 .coming-soon-tooltip {
     position: absolute;
     display: none;
@@ -114,7 +115,7 @@ button[type="submit"]:hover {
     border-radius: 5px;
     text-align: center;
     width: 120px;
-    top: 120%; /* Adjust this value to move the tooltip further up */
+    top: 100%; /* Position below the input */
     left: 50%; /* Center horizontally */
     transform: translateX(-50%);
 }
@@ -123,6 +124,14 @@ button[type="submit"]:hover {
 #attachments:hover + .coming-soon-tooltip {
     display: block;
 }
+
+/* Adjust other styles as needed */
+/* You can modify these styles to match your design */
+.form-row {
+    position: relative;
+    margin-bottom: 20px;
+}
+
 
 /* Responsive styles */
 @media screen and (max-width: 768px) {
