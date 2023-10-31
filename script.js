@@ -194,7 +194,7 @@ document.getElementById("projectForm").addEventListener("submit", async function
   }
   
   // Example: Add an event listener to a button or form submission
-  document.getElementById('uploadButton').addEventListener('click', handleFileUpload);
+  // document.getElementById('uploadButton').addEventListener('click', handleFileUpload);
 
   const submitButton = document.querySelector("#projectForm button[type='submit']");
   submitButton.disabled = true;
