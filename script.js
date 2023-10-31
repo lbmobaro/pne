@@ -211,7 +211,7 @@ document.getElementById("projectForm").addEventListener("submit", async function
             document.getElementById('projectForm').reset();
             
             // Display the confirmation message
-            document.getElementById('confirmationMessage').innerText = "Project data sent successfully!";
+            document.getElementById('confirmationMessage').innerText = "Project data sent successfully to Mobaro! Form will now reset.";
             
             // Hide the confirmation message after a few seconds
             setTimeout(() => {
