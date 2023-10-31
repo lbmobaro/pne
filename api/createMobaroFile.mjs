@@ -1,33 +1,22 @@
+// serverSide.js
+
 import fetch from 'node-fetch';
 
-// Your createMobaroFile function
-export default async function createMobaroFile() {
+export async function createMobaroFile(fileBuffer, fileName) {
   try {
-    const attachmentsInput = document.getElementById('attachments');
-    const file = attachmentsInput.files[0]; // Get the first selected file
-
-    if (!file) {
-      // Handle the case where no file is selected
-      console.error('No file selected.');
-      return;
-    }
-
-    // Read the file as an ArrayBuffer
-    const fileBuffer = await file.arrayBuffer();
-
     // Generate a unique boundary string
     const boundary = `------------------------${Math.random().toString(16)}`;
 
     // Construct the body payload as a Buffer
     const body = Buffer.concat([
       Buffer.from(`--${boundary}\r\n`),
-      Buffer.from(`Content-Disposition: form-data; name="File"; filename="${file.name}"\r\n`),
+      Buffer.from(`Content-Disposition: form-data; name="File"; filename="${fileName}"\r\n`),
       Buffer.from('Content-Type: application/octet-stream\r\n\r\n'),
       Buffer.from(fileBuffer),
       Buffer.from(`\r\n--${boundary}--\r\n`),
     ]);
 
-    // Construct the headers for the request
+    // Construct the headers for the request, including API key
     const headers = {
       'Content-Type': `multipart/form-data; boundary=${boundary}`,
       'x-api-key': process.env.MOBARO_API_KEY,
@@ -53,5 +42,3 @@ export default async function createMobaroFile() {
     throw error;
   }
 }
-
-export { createMobaroFile };
