@@ -1,6 +1,16 @@
 const nameToIdMap = {};
 let highPriorityValue;
 
+const themeToggleBtn = document.querySelector('#theme-toggle');
+
+themeToggleBtn.addEventListener('click', () => {
+    if (document.body.getAttribute('data-theme') === 'dark') {
+        document.body.setAttribute('data-theme', 'light');
+    } else {
+        document.body.setAttribute('data-theme', 'dark');
+    }
+});
+
 async function populateLocationsDropdown() {
   const locationDropdown = document.getElementById("location");
   locationDropdown.innerHTML = "";
