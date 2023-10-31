@@ -217,8 +217,9 @@ document.getElementById("projectForm").addEventListener("submit", async function
             
             // Hide the confirmation message after a few seconds
             setTimeout(() => {
-                document.getElementById('confirmationMessage').innerText = '';
-            }, 9000);
+                confirmationElement.classList.remove('showConfirmation'); // Remove the class to hide the message
+                confirmationElement.innerText = ''; // Clear the message text
+            }, 5000);
         } else {
             throw new Error(data.error || "Unknown error");
         }
