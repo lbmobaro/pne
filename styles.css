@@ -180,3 +180,19 @@ button[type="submit"]:hover {
 [data-theme="dark"] button[type="submit"]:hover {
     background-color: #6200EE;
 }
+
+/* Interactive Transitions */
+
+button[type="submit"]:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
+    transform: scale(1.01);
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
