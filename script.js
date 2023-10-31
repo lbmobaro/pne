@@ -200,12 +200,26 @@ document.getElementById("projectForm").addEventListener("submit", async function
   submitButton.disabled = true;
 
   fetch("/api/sendToMobaro", {
-    method: "POST",
-    body: formData,
-  })
+        method: "POST",
+        body: formData,
+    })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+        console.log(data);
+        if (data.message === "Project data sent to Mobaro successfully!") {
+            // Clear the form
+            document.getElementById('projectForm').reset();
+            
+            // Display the confirmation message
+            document.getElementById('confirmationMessage').innerText = "Project data sent successfully!";
+            
+            // Hide the confirmation message after a few seconds
+            setTimeout(() => {
+                document.getElementById('confirmationMessage').innerText = '';
+            }, 5000);
+        } else {
+            throw new Error(data.error || "Unknown error");
+        }
     })
     .catch((error) => {
       console.error(error);
