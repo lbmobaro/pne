@@ -60,10 +60,6 @@
   "name": "Choppers"
  },
  {
-  "id": "locations\/109487-A",
-  "name": "Clark #3"
- },
- {
   "id": "locations\/109043-A",
   "name": "Climbing Wall"
  },
@@ -96,10 +92,6 @@
   "name": "Dizzy Drop"
  },
  {
-  "id": "locations\/109048-A",
-  "name": "Drop Zone"
- },
- {
   "id": "locations\/139507-C",
   "name": "Employee Lounge"
  },
@@ -126,10 +118,6 @@
  {
   "id": "locations\/142922-C",
   "name": "Food & Beverage Office"
- },
- {
-  "id": "locations\/113240-B",
-  "name": "Fright Nights"
  },
  {
   "id": "locations\/142908-C",
@@ -168,10 +156,6 @@
   "name": "Glass House"
  },
  {
-  "id": "locations\/109488-A",
-  "name": "Golf Cart"
- },
- {
   "id": "locations\/142895-C",
   "name": "Grounds Maintenance Trailer (Gate 11)"
  },
@@ -202,22 +186,6 @@
  {
   "id": "locations\/109057-A",
   "name": "Honeybee Express"
- },
- {
-  "id": "locations\/109491-A",
-  "name": "HVAC Unit \/ Playland Admin"
- },
- {
-  "id": "locations\/109497-A",
-  "name": "HVAC Unit \/ Playland Central"
- },
- {
-  "id": "locations\/109501-A",
-  "name": "HVAC Unit \/ Playland Lowerline"
- },
- {
-  "id": "locations\/109504-A",
-  "name": "HVAC Units \/ Playland Triple O's"
  },
  {
   "id": "locations\/142902-C",
@@ -264,20 +232,8 @@
   "name": "One Ball"
  },
  {
-  "id": "locations\/113041-B",
-  "name": "Other"
- },
- {
   "id": "locations\/109469-A",
   "name": "Pacific Adventure Golf"
- },
- {
-  "id": "locations\/140409-C",
-  "name": "Park Closing"
- },
- {
-  "id": "locations\/140408-C",
-  "name": "Park Opening"
  },
  {
   "id": "locations\/109061-A",
@@ -296,10 +252,6 @@
   "name": "Playland Ride Operations Office"
  },
  {
-  "id": "locations\/109490-A",
-  "name": "Playland Truck (F150)"
- },
- {
   "id": "locations\/109473-A",
   "name": "PlayQuarters"
  },
@@ -310,10 +262,6 @@
  {
   "id": "locations\/109474-A",
   "name": "Pop-A-Lot"
- },
- {
-  "id": "locations\/109062-A",
-  "name": "Revelation"
  },
  {
   "id": "locations\/142919-C",
@@ -340,28 +288,12 @@
   "name": "Roller Coaster"
  },
  {
-  "id": "locations\/109485-A",
-  "name": "S45 Zoom Boom"
- },
- {
-  "id": "locations\/109484-A",
-  "name": "S85 Zoom Boom"
- },
- {
-  "id": "locations\/109489-A",
-  "name": "Scissorlift"
- },
- {
   "id": "locations\/109065-A",
   "name": "Scrambler"
  },
  {
   "id": "locations\/109066-A",
   "name": "Sea to Sky"
- },
- {
-  "id": "locations\/142898-C",
-  "name": "Sign Shop"
  },
  {
   "id": "locations\/109470-A",
@@ -389,7 +321,7 @@
  },
  {
   "id": "locations\/109051-A",
-  "name": "The Flutterbye"
+  "name": "Flutterbye"
  },
  {
   "id": "locations\/142321-A",
@@ -408,70 +340,6 @@
   "name": "Warehouse \/ Fun Factory"
  },
  {
-  "id": "locations\/109502-A",
-  "name": "Washroom \/ Mens \/ Playland Lowerline"
- },
- {
-  "id": "locations\/141802-A",
-  "name": "Washroom \/ Mens \/ Playland Mainline"
- },
- {
-  "id": "locations\/109503-A",
-  "name": "Washroom \/ Womens \/ Playland Lowerline"
- },
- {
-  "id": "locations\/141803-A",
-  "name": "Washroom \/ Womens \/ Playland Mainline"
- },
- {
-  "id": "locations\/109492-A",
-  "name": "Washroom 1 \/ GM Office"
- },
- {
-  "id": "locations\/109498-A",
-  "name": "Washroom 1 \/ Staff"
- },
- {
-  "id": "locations\/109493-A",
-  "name": "Washroom 2 \/ Admin"
- },
- {
-  "id": "locations\/109500-A",
-  "name": "Washroom 2 \/ CHQ"
- },
- {
-  "id": "locations\/109499-A",
-  "name": "Washroom 2 \/ Staff"
- },
- {
-  "id": "locations\/109494-A",
-  "name": "Washroom 3 \/ Admin"
- },
- {
-  "id": "locations\/109495-A",
-  "name": "Washroom 4 \/ Ride Ops"
- },
- {
-  "id": "locations\/109496-A",
-  "name": "Washroom 5 \/ Shop"
- },
- {
-  "id": "locations\/109508-A",
-  "name": "Washrooms \/ Mens \/ Playland Kiddieland"
- },
- {
-  "id": "locations\/109506-A",
-  "name": "Washrooms \/ Mens \/ Playland Triple O's"
- },
- {
-  "id": "locations\/109507-A",
-  "name": "Washrooms \/ Womens \/ Playland Kiddieland"
- },
- {
-  "id": "locations\/109505-A",
-  "name": "Washrooms \/ Womens \/ Playland Triple O's"
- },
- {
   "id": "locations\/109070-A",
   "name": "Westcoast Wheel"
  },
@@ -485,10 +353,6 @@
  },
  {
   "id": "locations\/142901-C",
-  "name": "Wokin' on Sunshine"
- },
- {
-  "id": "locations\/109486-A",
-  "name": "Z60 Zoom Boom"
+  "name": "Wok'n on Sunshine"
  }
 ]
