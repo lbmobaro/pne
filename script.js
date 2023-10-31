@@ -29,6 +29,28 @@ async function populateLocationsDropdown() {
   }
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    const highPriorityCheckbox = document.getElementById("highPriority");
+    const startDateInput = document.getElementById("startDate");
+    const completionDateInput = document.getElementById("completionDate");
+
+    highPriorityCheckbox.addEventListener("change", function () {
+        if (highPriorityCheckbox.checked) {
+            // Disable and remove "required" attribute
+            startDateInput.disabled = true;
+            completionDateInput.disabled = true;
+            startDateInput.removeAttribute("required");
+            completionDateInput.removeAttribute("required");
+        } else {
+            // Enable and add "required" attribute back
+            startDateInput.disabled = false;
+            completionDateInput.disabled = false;
+            startDateInput.setAttribute("required", "required");
+            completionDateInput.setAttribute("required", "required");
+        }
+    });
+});
+
 function generateFormattedDescription() {
   const name = document.getElementById("name").value;
   const department = document.getElementById("department").value;
