@@ -1,5 +1,4 @@
-// Import necessary modules using ES module syntax
-import fetch from 'node-fetch'; // Use 'node-fetch' for making HTTP requests in AWS Lambda
+import fetch from 'node-fetch';
 
 // Your createMobaroFile function
 async function createMobaroFile() {
@@ -32,7 +31,7 @@ async function createMobaroFile() {
     });
 
     if (response.ok) {
-      const fileData = await response.text(); // You can adjust this based on the expected response
+      const fileData = await response.text();
       console.log('File created in Mobaro:', fileData);
       return fileData;
     } else {
@@ -45,4 +44,4 @@ async function createMobaroFile() {
   }
 }
 
-export { createMobaroFile }; // Export your function for use in other modules
+export { createMobaroFile };
