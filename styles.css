@@ -7,7 +7,6 @@
 
 /* Global styles */
 body {
-    position: relative;
     font-family: 'Roboto', sans-serif;
     background-color: #EDEDED;
     color: #202124;  /* Dark text color from Material Design */
@@ -148,40 +147,6 @@ button[type="submit"]:hover {
     }
 }
 
-/* Dark theme modifications */
-[data-theme="dark"] {
-    background-color: #121212;
-    color: #E0E0E0;
-}
-
-[data-theme="dark"] .container {
-    background-color: #1F1F1F;
-}
-
-[data-theme="dark"] h1 {
-    color: #E0E0E0;
-}
-
-[data-theme="dark"] form {
-    background-color: #1F1F1F;
-}
-
-[data-theme="dark"] input[type="text"]:focus,
-[data-theme="dark"] input[type="date"]:focus,
-[data-theme="dark"] textarea:focus,
-[data-theme="dark"] select:focus {
-    border-color: #BB86FC;  /* Purple accent for dark theme */
-    box-shadow: 0 2px 0 #BB86FC;
-}
-
-[data-theme="dark"] button[type="submit"] {
-    background-color: #BB86FC;
-}
-
-[data-theme="dark"] button[type="submit"]:hover {
-    background-color: #6200EE;
-}
-
 /* Interactive Transitions */
 
 button[type="submit"]:hover {
@@ -245,13 +210,4 @@ input:checked + .switch-label {
 
 input:checked + .switch-label:before {
     transform: translateX(26px);
-}
-
-.switch-wrapper {
-    position: absolute;
-    top: 3cm; /* Change this value based on how far you want it from the top */
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
 }
