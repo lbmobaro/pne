@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 
 // Your createMobaroFile function
-async function createMobaroFile() {
+export default async function createMobaroFile() {
   try {
     const attachmentsInput = document.getElementById('attachments');
     const file = attachmentsInput.files[0]; // Get the first selected file
