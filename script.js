@@ -211,12 +211,14 @@ document.getElementById("projectForm").addEventListener("submit", async function
             document.getElementById('projectForm').reset();
             
             // Display the confirmation message
+            const confirmationElement = document.getElementById('confirmationMessage');
             document.getElementById('confirmationMessage').innerText = "Project data sent successfully to Mobaro! Form will now reset.";
+            confirmationElement.classList.add('showConfirmation');
             
             // Hide the confirmation message after a few seconds
             setTimeout(() => {
                 document.getElementById('confirmationMessage').innerText = '';
-            }, 5000);
+            }, 9000);
         } else {
             throw new Error(data.error || "Unknown error");
         }
