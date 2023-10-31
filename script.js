@@ -149,6 +149,35 @@ document.getElementById("projectForm").addEventListener("submit", async function
   const selectedLocationId = nameToIdMap[selectedLocationName];
   formData.append("locationId", selectedLocationId);
 
+  // clientSide.js
+
+  import { createMobaroFile } from './api/createMobaroFile'; // Import the server-side function
+  
+  // Use this function when handling user interactions
+  async function handleFileUpload() {
+    try {
+      const attachmentsInput = document.getElementById('attachments');
+      const file = attachmentsInput.files[0]; // Get the first selected file
+  
+      if (!file) {
+        // Handle the case where no file is selected
+        console.error('No file selected.');
+        return;
+      }
+  
+      // Read the file as an ArrayBuffer
+      const fileBuffer = await file.arrayBuffer();
+  
+      // Invoke the server-side function to create the Mobaro file
+      await createMobaroFile(fileBuffer, file.name);
+    } catch (error) {
+      console.error('Error handling file upload:', error);
+    }
+  }
+  
+  // Example: Add an event listener to a button or form submission
+  document.getElementById('uploadButton').addEventListener('click', handleFileUpload);
+
   const submitButton = document.querySelector("#projectForm button[type='submit']");
   submitButton.disabled = true;
 
