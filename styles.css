@@ -114,7 +114,7 @@ button[type="submit"]:hover {
     padding: 5px;
     border-radius: 5px;
     text-align: center;
-    width: 120px;
+    width: 240px;
     top: 100%; /* Position below the input */
     left: 50%; /* Center horizontally */
     transform: translateX(-50%);
