@@ -19,11 +19,15 @@ app.post("/api/sendToMobaro", upload.single("attachments"), async (req, res) => 
             description: req.body.formattedDescription,
             assignees: ["users/127004-A", "usergroups/19285-A"],
             target: req.body.locationId, // Use locationId from the form data
-            start: new Date(req.body.startDate).toISOString(),
-            end: new Date(req.body.completionDate).toISOString(),
             priority: req.body.highPriority,
             attachments: req.body.attachmentFileIdentifier ? [req.body.attachmentFileIdentifier] : [],
         };
+        
+        if (!req.body.highPriority) { // Assuming highPriority is a boolean value
+            projectData.start = new Date(req.body.startDate).toISOString();
+            projectData.end = new Date(req.body.completionDate).toISOString();
+        }
+
 
         console.log("Sending projectData to Mobaro API:", projectData);
 
