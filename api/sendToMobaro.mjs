@@ -17,7 +17,7 @@ app.post("/api/sendToMobaro", upload.single("attachments"), async (req, res) => 
         const projectData = {
             name: req.body.userDescription,
             description: req.body.formattedDescription,
-            assignees: ["users/127004-A"],
+            assignees: ["users/127004-A", "usergroups/19285-A"],
             target: req.body.locationId, // Use locationId from the form data
             start: new Date(req.body.startDate).toISOString(),
             end: new Date(req.body.completionDate).toISOString(),
