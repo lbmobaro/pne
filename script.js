@@ -151,7 +151,7 @@ document.getElementById("projectForm").addEventListener("submit", async function
 
   // clientSide.js
 
-  import { createMobaroFile } from './serverSide'; // Import the server-side function
+  import { createMobaroFile } from './api/createMobaroFile'; // Import the server-side function
   
   // Use this function when handling user interactions
   async function handleFileUpload() {
