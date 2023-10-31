@@ -7,6 +7,7 @@
 
 /* Global styles */
 body {
+    position: relative;
     font-family: 'Roboto', sans-serif;
     background-color: #EDEDED;
     color: #202124;  /* Dark text color from Material Design */
@@ -244,4 +245,13 @@ input:checked + .switch-label {
 
 input:checked + .switch-label:before {
     transform: translateX(26px);
+}
+
+.switch-wrapper {
+    position: absolute;
+    top: 3cm; /* Change this value based on how far you want it from the top */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
 }
