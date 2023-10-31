@@ -101,8 +101,12 @@ button[type="submit"]:hover {
 }
 
 /* Style the tooltip */
-.coming-soon-tooltip {
+.form-row {
     position: relative;
+}
+
+.coming-soon-tooltip {
+    position: absolute;
     display: none;
     background-color: #333;
     color: #fff;
@@ -110,7 +114,6 @@ button[type="submit"]:hover {
     border-radius: 5px;
     text-align: center;
     width: 120px;
-    position: absolute;
     top: 100%; /* Position below the input */
     left: 50%; /* Center horizontally */
     transform: translateX(-50%);
