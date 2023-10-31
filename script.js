@@ -95,6 +95,42 @@ document.getElementById("projectForm").addEventListener("submit", async function
     return;
   }
 
+  const attachmentsInput = document.getElementById("attachments");
+
+  async function createMobaroFile(file) {
+    try {
+      const attachmentData = new FormData();
+      attachmentData.append("attachments", file);
+      attachmentData.append("metadata", "Additional metadata for the file");
+      const createFileResponse = await fetch("/api/createMobaroFile", {
+        method: "POST",
+        body: attachmentData,
+      });
+
+      if (createFileResponse.ok) {
+        const fileData = await createFileResponse.json();
+        console.log("File created in Mobaro:", fileData);
+        return fileData;
+      } else {
+        console.error("Error creating file in Mobaro:", createFileResponse.status, createFileResponse.statusText);
+        throw new Error("Error creating file in Mobaro.");
+      }
+    } catch (error) {
+      console.error("Error creating file in Mobaro:", error);
+      throw error;
+    }
+  }
+
+  if (attachmentsInput.files.length > 0) {
+    const attachmentFile = attachmentsInput.files[0];
+    try {
+      const mobaroFile = await createMobaroFile(attachmentFile);
+      formData.append("attachments", JSON.stringify(mobaroFile));
+    } catch (error) {
+      console.error("Error creating Mobaro file:", error);
+    }
+  }
+
   formData.append("name", document.getElementById("name").value);
   formData.append("department", document.getElementById("department").value);
   formData.append("userDescription", document.getElementById("description").value);
@@ -113,7 +149,9 @@ document.getElementById("projectForm").addEventListener("submit", async function
   const selectedLocationId = nameToIdMap[selectedLocationName];
   formData.append("locationId", selectedLocationId);
 
-  import { createMobaroFile } from './api/createMobaroFile'; // Import the server-side function
+  // clientSide.js
+
+  import { createMobaroFile } from './serverSide'; // Import the server-side function
   
   // Use this function when handling user interactions
   async function handleFileUpload() {
