@@ -22,7 +22,6 @@ module.exports = async (event, context) => {
       };
     }
 
-    // Check the Content-Type of the response
     const contentType = response.headers.get("content-type");
     let responseData;
 
@@ -31,8 +30,7 @@ module.exports = async (event, context) => {
     } else if (contentType && contentType.includes("text/plain")) {
       responseData = await response.text();
       console.log(`Received plain text response: ${responseData}`);
-      // Handle the plain text data as necessary. For example, you might decide to log it, or send it back to the client.
-      // For the sake of this example, we'll return early:
+
       return {
         statusCode: 200,
         body: responseData
