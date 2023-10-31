@@ -11,6 +11,16 @@ themeToggleBtn.addEventListener('click', () => {
     }
 });
 
+const themeToggle = document.querySelector('#theme-toggle');
+
+themeToggle.addEventListener('change', () => {
+    if (themeToggle.checked) {
+        document.body.setAttribute('data-theme', 'dark');
+    } else {
+        document.body.setAttribute('data-theme', 'light');
+    }
+});
+
 async function populateLocationsDropdown() {
   const locationDropdown = document.getElementById("location");
   locationDropdown.innerHTML = "";
