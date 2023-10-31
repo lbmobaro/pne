@@ -148,10 +148,6 @@ document.getElementById("projectForm").addEventListener("submit", async function
   const selectedLocationName = document.getElementById("location").value;
   const selectedLocationId = nameToIdMap[selectedLocationName];
   formData.append("locationId", selectedLocationId);
-
-  // clientSide.js
-
-  import { createMobaroFile } from './api/createMobaroFile'; // Import the server-side function
   
   // Use this function when handling user interactions
   async function handleFileUpload() {
