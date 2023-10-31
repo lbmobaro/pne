@@ -94,6 +94,31 @@ button[type="submit"]:hover {
     background-color: #0056b3;
 }
 
+/* Style the disabled input */
+#attachments[disabled] {
+    background-color: #f0f0f0; /* Grey background */
+    cursor: not-allowed; /* Show disabled cursor */
+}
+
+/* Style the tooltip */
+.coming-soon-tooltip {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    top: 100%; /* Position below the input */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%);
+}
+
+/* Show the tooltip on hover */
+#attachments:hover + .coming-soon-tooltip {
+    display: inline-block;
+}
+
+
 /* Responsive styles */
 @media screen and (max-width: 768px) {
     .container {
