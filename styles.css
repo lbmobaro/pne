@@ -102,12 +102,15 @@ button[type="submit"]:hover {
 
 /* Style the tooltip */
 .coming-soon-tooltip {
+    position: relative;
     display: none;
-    position: absolute;
     background-color: #333;
     color: #fff;
     padding: 5px;
     border-radius: 5px;
+    text-align: center;
+    width: 120px;
+    position: absolute;
     top: 100%; /* Position below the input */
     left: 50%; /* Center horizontally */
     transform: translateX(-50%);
@@ -115,9 +118,8 @@ button[type="submit"]:hover {
 
 /* Show the tooltip on hover */
 #attachments:hover + .coming-soon-tooltip {
-    display: inline-block;
+    display: block;
 }
-
 
 /* Responsive styles */
 @media screen and (max-width: 768px) {
