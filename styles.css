@@ -242,12 +242,6 @@ input:checked + .switch-label:before {
     margin-left: 8px; /* Adjust the spacing between label and checkbox as needed */
 }
 
-/* Adjust label styles to align with the checkbox */
-.form-row {
-    display: flex;
-    align-items: center;
-}
-
 /* Style the checkbox */
 #highPriority {
     margin-left: 8px; /* Adjust the spacing between label and checkbox as needed */
