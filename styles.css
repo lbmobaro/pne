@@ -212,3 +212,15 @@ input:checked + .switch-label:before {
     transform: translateX(26px);
 }
 
+.warning-box {
+    display: none;
+    border: 1px solid #f44336; /* Red color for the warning border */
+    padding: 16px;
+    margin-top: 16px;
+    background-color: #ffebee; /* Red background color for the warning */
+    border-radius: 4px;
+}
+
+.mdc-theme--error {
+    color: #f44336; /* Red color for the error text */
+}
