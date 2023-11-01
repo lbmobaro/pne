@@ -227,6 +227,10 @@ input:checked + .switch-label:before {
     padding-left: 20px; /* Adjust the left padding as needed */
 }
 
+.padding-after-warning {
+    padding-top: 20px; /* Add padding after the warning box */
+}
+
 .mdc-theme--error {
     color: #f44336; /* Red color for the error text */
 }
