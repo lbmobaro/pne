@@ -223,6 +223,9 @@ input:checked + .switch-label:before {
     max-height: 200px; /* Set a maximum height for the warning box */
 }
 
+.custom-list {
+    padding-left: 20px; /* Adjust the left padding as needed */
+}
 
 .mdc-theme--error {
     color: #f44336; /* Red color for the error text */
