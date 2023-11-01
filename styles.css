@@ -38,8 +38,9 @@ form {
     padding: 24px;
     border-radius: 8px;
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    grid-template-columns: 150px 1fr; /* Label takes up 150px, input takes up the rest */
     gap: 24px; /* Gap between columns */
+    align-items: center; /* Vertically center align the content in case of mismatched row heights */
 }
 
 .form-group {
@@ -137,6 +138,9 @@ button[type="submit"]:hover {
     form {
         padding: 16px;
         grid-template-columns: 1fr; /* Single column */
+    }
+    label {
+        margin-bottom: 8px; /* Space between label and input on small screens */
     }
     input[type="text"],
     input[type="date"],
