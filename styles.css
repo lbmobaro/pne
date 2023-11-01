@@ -251,4 +251,7 @@ input:checked + .switch-label:before {
 /* Style only the High Priority checkbox */
 .form-row label[for="highPriority"] + input[type="checkbox"] {
     margin-left: 8px; /* Adjust the spacing between label and checkbox as needed */
+    width: 24px; /* Adjust the width as desired */
+    height: 24px; /* Adjust the height as desired */
 }
+
