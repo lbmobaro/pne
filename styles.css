@@ -37,6 +37,13 @@ form {
     background-color: #FFFFFF;
     padding: 24px;
     border-radius: 8px;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 24px; /* Gap between columns */
+}
+
+.form-group {
+    /* No specific styles needed, but you can add if necessary */
 }
 
 /* Form label styles */
@@ -70,7 +77,6 @@ input[type="file"] {
     cursor: pointer;
 }
 
-/* Form input focus styles */
 input[type="text"]:focus,
 input[type="date"]:focus,
 textarea:focus,
@@ -80,7 +86,6 @@ select:focus {
     box-shadow: 0 2px 0 #6200EE;
 }
 
-/* Form submit button styles */
 button[type="submit"] {
     background-color: #6200EE;
     color: #FFFFFF;
@@ -96,18 +101,15 @@ button[type="submit"]:hover {
     background-color: #3700B3;
 }
 
-/* Style the disabled input */
 #attachments[disabled] {
     background-color: #E0E0E0;  /* Grey background */
     cursor: not-allowed;
 }
 
-/* Style the tooltip */
 .form-row {
     position: relative;
 }
 
-/* Style the tooltip */
 .coming-soon-tooltip {
     position: absolute;
     display: none;
@@ -122,7 +124,6 @@ button[type="submit"]:hover {
     transform: translateX(-50%);
 }
 
-/* Show the tooltip on hover */
 #attachments:hover + .coming-soon-tooltip {
     display: block;
 }
@@ -135,6 +136,7 @@ button[type="submit"]:hover {
     }
     form {
         padding: 16px;
+        grid-template-columns: 1fr; /* Single column */
     }
     input[type="text"],
     input[type="date"],
@@ -146,8 +148,6 @@ button[type="submit"]:hover {
         margin-bottom: 16px;
     }
 }
-
-/* Interactive Transitions */
 
 button[type="submit"]:hover {
     transform: scale(1.05);
@@ -235,23 +235,19 @@ input:checked + .switch-label:before {
     color: #f44336; /* Red color for the error text */
 }
 
-/* Add styles for the checkbox wrapper */
 .checkbox-wrapper {
     display: flex;
     align-items: center;
     margin-left: 8px; /* Adjust the spacing between label and checkbox as needed */
 }
 
-/* Style the High Priority checkbox wrapper */
 .form-row {
     display: flex;
     align-items: center;
 }
 
-/* Style only the High Priority checkbox */
 .form-row label[for="highPriority"] + input[type="checkbox"] {
     margin-left: 8px; /* Adjust the spacing between label and checkbox as needed */
     width: 24px; /* Adjust the width as desired */
     height: 24px; /* Adjust the height as desired */
 }
-
