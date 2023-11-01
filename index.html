@@ -44,15 +44,17 @@
             </div>
             
             <div class="explanation">
-                <p>If High Priority is selected, the Playland F&M team will connect with you directly for scheduling.</p>
-                <p>Earliest Start and Completion Date fields will not be applicable.</p>
-                <p>Priority level will be based on resource availability and existing commitments.</p>
-                <p>High Priority requests may result in elevated costs due to expedited resourcing.</p>
+                <!-- You can add content here if needed -->
             </div>
             
-            <div class="warning-box" id="warningBox">
+            <div class="warning-box" id="warningBox" aria-live="assertive" aria-hidden="true">
                 <p class="mdc-typography--subtitle1 mdc-theme--error">Warning:</p>
-                <p class="mdc-typography--body2">Selecting High Priority will result in special handling of your request.</p>
+                <ul class="mdc-list mdc-list--dense">
+                    <li>If High Priority is selected, the Playland F&M team will connect with you directly for scheduling.</li>
+                    <li>Earliest Start and Completion Date fields will not be applicable.</li>
+                    <li>Priority level will be based on resource availability and existing commitments.</li>
+                    <li>High Priority requests may result in elevated costs due to expedited resourcing.</li>
+                </ul>
             </div>
             <div class="form-row">
                 <label for="startDate">Earliest Start Date *</label>
