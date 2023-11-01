@@ -234,3 +234,15 @@ input:checked + .switch-label:before {
 .mdc-theme--error {
     color: #f44336; /* Red color for the error text */
 }
+
+/* Add styles for the checkbox wrapper */
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 8px; /* Adjust the spacing between label and checkbox as needed */
+}
+
+/* Style the checkbox */
+#highPriority {
+    margin: 0; /* Reset margin to avoid extra spacing */
+}
