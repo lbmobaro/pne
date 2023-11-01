@@ -255,3 +255,15 @@ input:checked + .switch-label:before {
     width: 24px; /* Adjust the width as desired */
     height: 24px; /* Adjust the height as desired */
 }
+
+label {
+    background-color: yellow;
+}
+
+input[type="text"],
+input[type="date"],
+textarea,
+select {
+    background-color: lightblue;
+}
+
