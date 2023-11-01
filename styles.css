@@ -242,9 +242,13 @@ input:checked + .switch-label:before {
     margin-left: 8px; /* Adjust the spacing between label and checkbox as needed */
 }
 
+/* Style the High Priority checkbox wrapper */
+.form-row {
+    display: flex;
+    align-items: center;
+}
+
 /* Style only the High Priority checkbox */
 .form-row label[for="highPriority"] + input[type="checkbox"] {
     margin-left: 8px; /* Adjust the spacing between label and checkbox as needed */
 }
-
-
