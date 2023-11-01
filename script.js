@@ -1,6 +1,19 @@
 const nameToIdMap = {};
 let highPriorityValue;
 
+document.addEventListener('DOMContentLoaded', function() {
+    var highPriorityCheckbox = document.getElementById('highPriority');
+    var warningBox = document.getElementById('warningBox');
+
+    highPriorityCheckbox.addEventListener('change', function() {
+        if (highPriorityCheckbox.checked) {
+            warningBox.style.display = 'block'; // Show the warning box
+        } else {
+            warningBox.style.display = 'none'; // Hide the warning box
+        }
+    });
+});
+
 async function populateLocationsDropdown() {
   const locationDropdown = document.getElementById("location");
   locationDropdown.innerHTML = "";
