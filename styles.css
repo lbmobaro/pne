@@ -214,11 +214,17 @@ input:checked + .switch-label:before {
 
 .warning-box {
     display: none;
-    border: 1px solid #f44336; /* Red color for the warning border */
+    border: 1px solid #f44336;
     padding: 16px;
     margin-top: 16px;
-    background-color: #ffebee; /* Red background color for the warning */
+    background-color: #ffebee;
     border-radius: 4px;
+    overflow: auto; /* Add overflow property */
+    max-height: 200px; /* Set a maximum height for the warning box */
+}
+
+.custom-list {
+    padding-left: 20px; /* Adjust the left padding as needed */
 }
 
 .mdc-theme--error {
