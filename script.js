@@ -82,17 +82,17 @@ function generateFormattedDescription() {
   const highPriorityCheckbox = document.getElementById("highPriority");
   highPriorityValue = highPriorityCheckbox.checked ? "true" : "false";
 
-  return `<div style="font-weight: bold;">Name:</div>${name}<br>
-          <div style="font-weight: bold;">Department:</div>${department}<br>
-          <div style="font-weight: bold;">User Description:</div>${userDescription}<br>
+  return `<div style="font-weight: bold;">Person Requesting Work:</div>${name}<br>
+          <div style="font-weight: bold;">Department Requesting Work:</div>${department}<br>
+          <div style="font-weight: bold;">Description of work required:</div>${userDescription}<br>
           <div style="font-weight: bold;">Site Contact:</div>${siteContact}<br>
           <div style="font-weight: bold;">Start Date:</div>${startDate}<br>
           <div style="font-weight: bold;">End Date:</div>${completionDate}<br>
           <div style="font-weight: bold;">GL Code:</div>${glCode}<br>
-          <div style="font-weight: bold;">Cost Center Code:</div>${costCenterCode}<br>
-          <div style="font-weight: bold;">Cost Unit Code:</div>${costUnitCode}<br>
+          <div style="font-weight: bold;">Cost Center:</div>${costCenterCode}<br>
+          <div style="font-weight: bold;">Cost Unit:</div>${costUnitCode}<br>
           <div style="font-weight: bold;">Project Code:</div>${projectCode}<br>
-          <div style="font-weight: bold;">Project Budget:</div>${projectBudget}`;
+          <div style="font-weight: bold;">Allotted Project Budget:</div>${projectBudget}`;
 }
 
 populateLocationsDropdown();
