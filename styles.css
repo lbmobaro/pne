@@ -231,3 +231,9 @@ input:checked + .switch-label:before {
 .mdc-theme--error {
     color: #f44336; /* Red color for the error text */
 }
+
+/* Increase the size of the checkboxes */
+input[type="checkbox"] {
+    width: 24px; /* Adjust the width as needed */
+    height: 24px; /* Adjust the height as needed */
+}
